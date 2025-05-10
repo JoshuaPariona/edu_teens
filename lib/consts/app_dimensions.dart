@@ -20,4 +20,6 @@ class AppDimensions {
   static const double textDescription = 12;
   static const double textLabel = 10;
   static const double textFootnote = textDescription;
+
+  static const double tabIconSize = 20;
 }

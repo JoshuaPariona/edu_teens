@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_dimensions.dart';
 import 'package:edu_teens/consts/app_strings.dart';
+import 'package:edu_teens/consts/app_durations.dart';
 
 ButtonStyle buildPrimaryButtonLightStyle() {
   return ButtonStyle(
@@ -35,7 +36,7 @@ ButtonStyle buildPrimaryButtonLightStyle() {
         fontWeight: FontWeight.w500,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
@@ -82,7 +83,7 @@ ButtonStyle buildNeutralButtonLightStyle() {
         fontWeight: FontWeight.w500,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
@@ -130,7 +131,7 @@ ButtonStyle buildOutlinedButtonLightStyle() {
         fontWeight: FontWeight.w500,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
@@ -175,7 +176,7 @@ ButtonStyle buildSecondaryButtonLightStyle() {
         fontWeight: FontWeight.w500,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 

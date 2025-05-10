@@ -1,5 +1,6 @@
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_strings.dart';
+import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/text_button_variant_themes.dart';
@@ -36,6 +37,7 @@ class AppTheme {
         secondary: buildSecondaryIconButtonLightStyle(),
         text: buildTextIconButtonLightStyle(),
       ),
+      BottomNavTheme(style: buildBottomNavLightStyle())
     ],
 
     elevatedButtonTheme: ElevatedButtonThemeData(

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:edu_teens/components/bottom_nav.dart';
 
 class DashboardLayout extends StatelessWidget {
-  const DashboardLayout({required Widget child, super.key});
+  final Widget child;
+
+  const DashboardLayout({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(bottomNavigationBar: BottomNav(), body: child);
   }
 }

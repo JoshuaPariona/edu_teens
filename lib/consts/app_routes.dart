@@ -23,6 +23,7 @@ class AppRoutes {
     p: "/dashboard/assignments",
     n: "assignments",
   );
+  static const List<RouteInfo> dashboardTabs = [home, courses, progress, profile];
 }
 
 abstract class RouteInfo {

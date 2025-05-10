@@ -1,3 +1,4 @@
+import 'package:edu_teens/consts/app_durations.dart';
 import 'package:edu_teens/consts/app_routes.dart';
 import 'package:edu_teens/pages/pages.dart';
 import 'package:go_router/go_router.dart';
@@ -43,6 +44,8 @@ class AppRouter {
             name: AppRoutes.home.name,
             pageBuilder:
                 (context, state) => CustomTransitionPage(
+                  transitionDuration: AppDurations.pageTransition,
+                  reverseTransitionDuration: AppDurations.pageTransition,
                   key: state.pageKey,
                   child: HomePage(),
                   transitionsBuilder: (
@@ -66,6 +69,8 @@ class AppRouter {
             name: AppRoutes.assignments.name,
             pageBuilder:
                 (context, state) => CustomTransitionPage(
+                  transitionDuration: AppDurations.pageTransition,
+                  reverseTransitionDuration: AppDurations.pageTransition,
                   key: state.pageKey,
                   child: AssignmentsPage(),
                   transitionsBuilder: (
@@ -89,6 +94,8 @@ class AppRouter {
             name: AppRoutes.progress.name,
             pageBuilder:
                 (context, state) => CustomTransitionPage(
+                  transitionDuration: AppDurations.pageTransition,
+                  reverseTransitionDuration: AppDurations.pageTransition,
                   key: state.pageKey,
                   child: ProgressPage(),
                   transitionsBuilder: (
@@ -112,6 +119,8 @@ class AppRouter {
             name: AppRoutes.profile.name,
             pageBuilder:
                 (context, state) => CustomTransitionPage(
+                  transitionDuration: AppDurations.pageTransition,
+                  reverseTransitionDuration: AppDurations.pageTransition,
                   key: state.pageKey,
                   child: ProfilePage(),
                   transitionsBuilder: (

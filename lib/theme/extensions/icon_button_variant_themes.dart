@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_dimensions.dart';
+import 'package:edu_teens/consts/app_durations.dart';
 
 ButtonStyle buildPrimaryIconButtonLightStyle() {
   return ButtonStyle(
@@ -24,7 +25,7 @@ ButtonStyle buildPrimaryIconButtonLightStyle() {
         horizontal: AppDimensions.spaceLarge,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
@@ -61,7 +62,7 @@ ButtonStyle buildNeutralIconButtonLightStyle() {
         horizontal: AppDimensions.spaceLarge,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
@@ -99,7 +100,7 @@ ButtonStyle buildOutlinedIconButtonLightStyle() {
         horizontal: AppDimensions.spaceLarge,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
@@ -134,7 +135,7 @@ ButtonStyle buildSecondaryIconButtonLightStyle() {
         horizontal: AppDimensions.spaceLarge,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
@@ -167,7 +168,7 @@ ButtonStyle buildTextIconButtonLightStyle() {
         horizontal: AppDimensions.spaceLarge,
       ),
     ),
-    animationDuration: Duration(milliseconds: 300),
+    animationDuration: AppDurations.buttonHoverDuration,
   );
 }
 
