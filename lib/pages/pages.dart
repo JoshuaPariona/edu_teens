@@ -2,7 +2,7 @@ export 'package:edu_teens/pages/login_page.dart';
 export 'package:edu_teens/pages/signin_page.dart';
 export 'package:edu_teens/pages/onboarding_page.dart';
 export 'package:edu_teens/pages/dashboard/shell_layout.dart';
-export 'package:edu_teens/pages/dashboard/assignments_page.dart';
+export 'package:edu_teens/pages/dashboard/courses_page.dart';
 export 'package:edu_teens/pages/dashboard/home_page.dart';
 export 'package:edu_teens/pages/dashboard/profile_page.dart';
 export 'package:edu_teens/pages/dashboard/progress_page.dart';

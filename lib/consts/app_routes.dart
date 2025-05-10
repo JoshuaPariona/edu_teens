@@ -19,10 +19,11 @@ class AppRoutes {
     p: "/dashboard/progress",
     n: "progress",
   );
-  static const RouteInfo assignments = _RouteInfo(
-    p: "/dashboard/assignments",
+  static const RouteInfo courses = _RouteInfo(
+    p: "/dashboard/courses",
     n: "assignments",
   );
+
   static const List<RouteInfo> dashboardTabs = [home, courses, progress, profile];
 }
 

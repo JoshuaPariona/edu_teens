@@ -65,21 +65,21 @@ class AppRouter {
                 ),
           ),
           GoRoute(
-            path: AppRoutes.assignments.path,
-            name: AppRoutes.assignments.name,
+            path: AppRoutes.courses.path,
+            name: AppRoutes.courses.name,
             pageBuilder:
                 (context, state) => CustomTransitionPage(
                   transitionDuration: AppDurations.pageTransition,
                   reverseTransitionDuration: AppDurations.pageTransition,
                   key: state.pageKey,
-                  child: AssignmentsPage(),
+                  child: CoursesPage(),
                   transitionsBuilder: (
                     context,
                     animation,
                     secondaryAnimation,
                     child,
                   ) {
-                    dashboardCurrentRouteInfo = AppRoutes.assignments;
+                    dashboardCurrentRouteInfo = AppRoutes.courses;
                     return SlideTransition(
                       position: animation.drive(
                         Tween(begin: Offset(1, 0), end: Offset.zero),
