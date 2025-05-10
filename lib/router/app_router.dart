@@ -9,7 +9,7 @@ class AppRouter {
   static RouteInfo dashboardCurrentRouteInfo = AppRoutes.home;
 
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.signin.path,
+    initialLocation: AppRoutes.dashboard.path,
     routes: [
       GoRoute(
         path: AppRoutes.login.path,
@@ -57,7 +57,7 @@ class AppRouter {
                     dashboardCurrentRouteInfo = AppRoutes.home;
                     return SlideTransition(
                       position: animation.drive(
-                        Tween(begin: Offset(1, 0), end: Offset.zero),
+                        Tween(begin: Offset(-1.0, 0.0), end: Offset.zero),
                       ),
                       child: child,
                     );
@@ -79,10 +79,14 @@ class AppRouter {
                     secondaryAnimation,
                     child,
                   ) {
+                    double dx = -1;
+                    if (dashboardCurrentRouteInfo == AppRoutes.home) {
+                      dx = 1;
+                    }
                     dashboardCurrentRouteInfo = AppRoutes.courses;
                     return SlideTransition(
                       position: animation.drive(
-                        Tween(begin: Offset(1, 0), end: Offset.zero),
+                        Tween(begin: Offset(dx, 0.0), end: Offset.zero),
                       ),
                       child: child,
                     );
@@ -104,10 +108,14 @@ class AppRouter {
                     secondaryAnimation,
                     child,
                   ) {
+                    double dx = 1;
+                    if (dashboardCurrentRouteInfo == AppRoutes.profile) {
+                      dx = -1;
+                    }
                     dashboardCurrentRouteInfo = AppRoutes.progress;
                     return SlideTransition(
                       position: animation.drive(
-                        Tween(begin: Offset(1, 0), end: Offset.zero),
+                        Tween(begin: Offset(dx, 0.0), end: Offset.zero),
                       ),
                       child: child,
                     );
@@ -132,7 +140,7 @@ class AppRouter {
                     dashboardCurrentRouteInfo = AppRoutes.profile;
                     return SlideTransition(
                       position: animation.drive(
-                        Tween(begin: Offset(1, 0), end: Offset.zero),
+                        Tween(begin: Offset(1.0, 0.0), end: Offset.zero),
                       ),
                       child: child,
                     );
