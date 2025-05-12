@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:edu_teens/components/bottom_nav.dart';
+import 'package:edu_teens/components/app_bottom_navigator_bar.dart';
 
 class DashboardLayout extends StatelessWidget {
   final Widget child;
