@@ -16,7 +16,6 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
     with SingleTickerProviderStateMixin {
   late int selectedIndex;
   late AnimationController _controller;
-  late Animation<double> _animation;
 
   bool isTabsDisabled = false;
 
@@ -28,7 +27,7 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
       vsync: this,
       duration: AppDurations.pageTransition,
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    Animation _ = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   void _onTap(int index) {
