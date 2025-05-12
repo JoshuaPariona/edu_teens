@@ -1,5 +1,7 @@
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_strings.dart';
+import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
+import 'package:edu_teens/theme/extensions/app_page_theme.dart';
 import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
@@ -17,7 +19,7 @@ class AppTheme {
       brightness: Brightness.light,
     ),
     primaryColor: AppColors.primary,
-    scaffoldBackgroundColor: AppColors.neutralInverted,
+    scaffoldBackgroundColor: AppColors.primary,
 
     extensions: [
       ElevatedButtonVariantThemes(
@@ -37,7 +39,9 @@ class AppTheme {
         secondary: buildSecondaryIconButtonLightStyle(),
         text: buildTextIconButtonLightStyle(),
       ),
-      BottomNavTheme(style: buildBottomNavLightStyle())
+      BottomNavTheme(style: buildBottomNavLightStyle()),
+      AppAppBarTheme(style: buildAppAppBarLightStyle()),
+      AppPageTheme(style: buildAppPageLightStyle())
     ],
 
     elevatedButtonTheme: ElevatedButtonThemeData(

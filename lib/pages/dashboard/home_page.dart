@@ -1,3 +1,5 @@
+import 'package:edu_teens/components/app_page.dart';
+import 'package:edu_teens/utils.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -5,6 +7,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return AppPage(
+      attachScrollController: true,
+      children: [
+        ...buildWidgetArray(
+          30,
+          (n) => Padding(padding: EdgeInsets.all(20), child: Text("data")),
+        ),
+      ],
+    );
   }
 }
