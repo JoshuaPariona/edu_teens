@@ -3,13 +3,13 @@ import 'dart:ui';
 class AppColors {
   AppColors._();
 
-  static const Color primary = Color(0xff5E5EB3);
+  static const Color primary = primary_5;
   static const Color secondary = Color(0xffCEE991);
   static const Color tertiary = Color(0xff9fbaf1);
 
-  static const Color success = Color(0xff34b248);
-  static const Color warning = Color(0xffe8a530);
-  static const Color error = Color(0xffd06c6c);
+  static const Color success = successHard;
+  static const Color warning = warningHard;
+  static const Color error = errorHard;
 
   static const Color primary_1 = Color(0xffeeeef7);
   static const Color primary_2 = Color(0xffcbcbe7);
