@@ -105,27 +105,33 @@ class _AppAppBarState extends State<AppAppBar> {
             opacity: opacity,
             child: SizedBox(
               height: height,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  AppText(
-                    "¡Bienvenida, Luciana! ",
-                    size: AppTextSizeType.h4,
-                    weight: AppTextWeightType.medium,
-                    color: theme.style.foregroundColor,
-                  ),
-                  SizedBox(
-                    height: theme.style.verticalFlexibleSpaceGap,
-                    width: double.infinity,
-                  ),
-                  AppText(
-                    "¿Lista para romperla con las mates hoy?",
-                    size: AppTextSizeType.subtitle,
-                    weight: AppTextWeightType.regular,
-                    color: theme.style.foregroundColor,
-                  ),
-                ],
+              child: SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: theme.style.verticalGap,
+                      width: double.infinity,
+                    ),
+                    AppText(
+                      "¡Bienvenida, Valery! ",
+                      size: AppTextSizeType.h4,
+                      weight: AppTextWeightType.medium,
+                      color: theme.style.foregroundColor,
+                    ),
+                    SizedBox(
+                      height: theme.style.verticalFlexibleSpaceGap,
+                      width: double.infinity,
+                    ),
+                    AppText(
+                      "¿Lista para romperla con las mates hoy?",
+                      size: AppTextSizeType.subtitle,
+                      weight: AppTextWeightType.regular,
+                      color: theme.style.foregroundColor,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
