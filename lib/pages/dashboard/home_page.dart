@@ -1,4 +1,5 @@
 import 'package:edu_teens/components/app_page.dart';
+import 'package:edu_teens/components/app_section.dart';
 import 'package:edu_teens/components/info_card.dart';
 import 'package:edu_teens/utils.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
       attachScrollController: true,
       children: [
         InfoCard(),
+        AppSection(title: "Tus avances recientes", content: SizedBox()),
         ...buildWidgetArray(
           30,
           (n) => Padding(padding: EdgeInsets.all(20), child: Text("data")),

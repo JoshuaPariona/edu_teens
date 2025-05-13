@@ -73,7 +73,6 @@ class _UiTestState extends State<UiTest> {
                 AppTextButton(
                   title: "Button",
                   type: AppTextButtonType.text,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -82,7 +81,6 @@ class _UiTestState extends State<UiTest> {
                 AppTextButton(
                   title: "Button",
                   type: AppTextButtonType.link,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },

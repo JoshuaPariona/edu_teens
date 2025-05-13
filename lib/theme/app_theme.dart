@@ -5,6 +5,7 @@ import 'package:edu_teens/consts/app_strings.dart';
 import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
 import 'package:edu_teens/theme/extensions/app_label_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/app_page_theme.dart';
+import 'package:edu_teens/theme/extensions/app_section_theme.dart';
 import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
@@ -57,6 +58,7 @@ class AppTheme {
         warning: buildPrimaryLabelLightStyle(),
       ),
       InfoCardTheme(style: buildInfoCardLightStyle()),
+      AppSectionTheme(style: buildAppSectionLightStyle())
     ],
 
     elevatedButtonTheme: ElevatedButtonThemeData(
