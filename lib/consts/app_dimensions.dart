@@ -9,7 +9,7 @@ class AppDimensions {
   static const double spaceXLarge = 32;
   static const double spaceXXLarge = 40;
 
-  static const double spaceBorder = spaceXLarge;
+  static const double spaceBorder = spaceLarge;
 
   static const double textHeader1 = 33;
   static const double textHeader2 = 28;

@@ -52,7 +52,7 @@ class _AppAppBarState extends State<AppAppBar> {
               CircleAvatar(
                 backgroundColor: theme.style.foregroundColor,
                 radius: theme.style.leadingSize,
-                child: AppImages.avatar,
+                child: Image.asset(AppImages.avatar),
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,

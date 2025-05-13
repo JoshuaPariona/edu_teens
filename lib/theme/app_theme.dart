@@ -8,6 +8,7 @@ import 'package:edu_teens/theme/extensions/app_page_theme.dart';
 import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
+import 'package:edu_teens/theme/extensions/info_card_theme.dart';
 import 'package:edu_teens/theme/extensions/text_button_variant_themes.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,7 @@ class AppTheme {
         error: buildPrimaryLabelLightStyle(),
         warning: buildPrimaryLabelLightStyle(),
       ),
+      InfoCardTheme(style: buildInfoCardLightStyle()),
     ],
 
     elevatedButtonTheme: ElevatedButtonThemeData(

@@ -9,12 +9,10 @@ class AppButton extends StatelessWidget {
   final VoidCallback? onPress;
   final ValueChanged<bool>? onHover;
   final VoidCallback? onLongPress;
-  final bool isEnabled;
 
   const AppButton({
     required this.title,
     required this.type,
-    required this.isEnabled,
     this.onPress,
     this.onHover,
     this.onLongPress,
@@ -39,9 +37,9 @@ class AppButton extends StatelessWidget {
     final theme = Theme.of(context).extension<ElevatedButtonVariantThemes>()!;
 
     return ElevatedButton(
-      onPressed: isEnabled ? onPress : null,
-      onHover: isEnabled ? onHover : null,
-      onLongPress: isEnabled ? onLongPress : null,
+      onPressed: onPress,
+      onHover: onHover,
+      onLongPress: onLongPress,
       style: _selectStyle(theme),
       child: Text(title),
     );

@@ -27,7 +27,6 @@ class _UiTestState extends State<UiTest> {
                 AppButton(
                   title: "Button control",
                   type: AppButtonType.primary,
-                  isEnabled: true,
                   onPress: () {
                     setState(() {
                       isEnabled = !isEnabled;
@@ -38,7 +37,6 @@ class _UiTestState extends State<UiTest> {
                 AppButton(
                   title: "Button",
                   type: AppButtonType.primary,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -47,7 +45,6 @@ class _UiTestState extends State<UiTest> {
                 AppButton(
                   title: "Button",
                   type: AppButtonType.neutral,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -56,7 +53,6 @@ class _UiTestState extends State<UiTest> {
                 AppButton(
                   title: "Button",
                   type: AppButtonType.outlined,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -65,7 +61,6 @@ class _UiTestState extends State<UiTest> {
                 AppButton(
                   title: "Button",
                   type: AppButtonType.secondary,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
