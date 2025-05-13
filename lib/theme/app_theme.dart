@@ -1,4 +1,6 @@
 import 'package:edu_teens/consts/app_colors.dart';
+import 'package:edu_teens/consts/app_dimensions.dart';
+import 'package:edu_teens/consts/app_durations.dart';
 import 'package:edu_teens/consts/app_strings.dart';
 import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
 import 'package:edu_teens/theme/extensions/app_label_variant_themes.dart';
@@ -62,7 +64,18 @@ class AppTheme {
     textButtonTheme: TextButtonThemeData(style: buildTextButtonLightStyle()),
 
     iconButtonTheme: IconButtonThemeData(
-      style: buildPrimaryIconButtonLightStyle(),
+      style: ButtonStyle(
+        elevation: WidgetStateProperty.resolveWith<double>((states) {
+          if (states.contains(WidgetState.hovered)) return 1;
+          if (states.contains(WidgetState.pressed)) return 2;
+          return 0;
+        }),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        padding: WidgetStatePropertyAll(EdgeInsets.zero),
+        iconSize: WidgetStateProperty.all(AppDimensions.appIconSize),
+        iconColor: WidgetStateProperty.all(AppColors.neutralBase),
+        animationDuration: AppDurations.buttonHoverDuration,
+      ),
     ),
   );
 }

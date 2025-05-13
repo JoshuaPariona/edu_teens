@@ -23,9 +23,9 @@ class AppText extends StatelessWidget {
   final Color color;
   final String text;
 
-  const AppText({
+  const AppText(
+    this.text, {
     super.key,
-    required this.text,
     this.weight = AppTextWeightType.regular,
     this.size = AppTextSizeType.body,
     this.color = AppColors.neutralBase,

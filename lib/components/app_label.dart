@@ -75,7 +75,7 @@ class AppLabel extends StatelessWidget {
           ),
           SizedBox(width: style.horizontalGap),
           AppText(
-            text: label,
+            label,
             size: AppTextSizeType.description,
             weight: AppTextWeightType.medium,
             color: filled ? style.filledForegroundColor : style.foregroundColor,

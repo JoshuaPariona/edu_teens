@@ -5,6 +5,8 @@ import 'package:edu_teens/consts/app_dimensions.dart';
 AppAppBarStyle buildAppAppBarLightStyle() {
   return const AppAppBarStyle(
     backgroundColor: AppColors.primary,
+    foregroundColor: AppColors.neutralInverted,
+    leadingSize: AppDimensions.avatarCircleRadius,
     flexibleSpaceExpandedHeight: AppDimensions.flexibleSpaceExpandedHeight,
     collapseDuration: Duration(milliseconds: 100),
     horizontalPadding: AppDimensions.spaceMedium,
@@ -17,6 +19,8 @@ AppAppBarStyle buildAppAppBarLightStyle() {
 
 class AppAppBarStyle {
   final Color backgroundColor;
+  final Color foregroundColor;
+  final double leadingSize;
   final double flexibleSpaceExpandedHeight;
   final Duration collapseDuration;
   final double horizontalPadding;
@@ -26,8 +30,10 @@ class AppAppBarStyle {
   final double verticalFlexibleSpaceGap;
 
   const AppAppBarStyle({
-    required this.flexibleSpaceExpandedHeight,
+    required this.foregroundColor,
     required this.backgroundColor,
+    required this.flexibleSpaceExpandedHeight,
+    required this.leadingSize,
     required this.collapseDuration,
     required this.horizontalPadding,
     required this.verticalPadding,
