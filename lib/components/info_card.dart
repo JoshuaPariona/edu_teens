@@ -5,7 +5,15 @@ import 'package:edu_teens/theme/extensions/info_card_theme.dart';
 import 'package:flutter/material.dart';
 
 class InfoCard extends StatelessWidget {
-  const InfoCard({super.key});
+  final String message;
+  final String title;
+  final VoidCallback? onPress;
+  const InfoCard({
+    super.key,
+    required this.message,
+    required this.title,
+    this.onPress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +54,16 @@ class InfoCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           AppText(
-                            "¡Acepta el desafío y demuestra todo tu poder matemático!",
+                            message,
                             size: AppTextSizeType.subtitle,
                             weight: AppTextWeightType.medium,
                             color: theme.style.foregroundColor,
                           ),
                           SizedBox(height: theme.style.verticalGap),
                           AppButton(
-                            title: "Comenzar reto",
+                            title: title,
                             type: AppButtonType.secondary,
-                            onPress: () => print("test"),
+                            onPress: onPress,
                           ),
                         ],
                       ),

@@ -1,6 +1,6 @@
 import 'package:edu_teens/components/app_text.dart';
 import 'package:edu_teens/components/app_text_button.dart';
-import 'package:edu_teens/theme/extensions/app_section_theme.dart';
+import 'package:edu_teens/consts/app_dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppSection extends StatelessWidget {
@@ -17,7 +17,6 @@ class AppSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).extension<AppSectionTheme>()!;
     return Column(
       children: [
         Row(
@@ -36,7 +35,7 @@ class AppSection extends StatelessWidget {
               ),
           ],
         ),
-        SizedBox(height: theme.style.verticalGap, width: double.infinity),
+        SizedBox(height: AppDimensions.spaceMedium, width: double.infinity),
         content,
       ],
     );

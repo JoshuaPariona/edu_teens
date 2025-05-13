@@ -50,6 +50,7 @@ class AppPage extends StatelessWidget {
             attachScrollController
                 ? scrollControllerProvider.scrollController
                 : null,
+        physics: ClampingScrollPhysics(),
         slivers: [
           SliverPadding(
             padding: EdgeInsets.symmetric(
