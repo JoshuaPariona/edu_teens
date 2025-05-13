@@ -12,11 +12,14 @@ class DashboardLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => ScrollControllerProvider(),
-      child: Scaffold(
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [AppAppBar(), Expanded(child: child)]),
-        bottomNavigationBar: AppBottomNavigatorBar(),
+      child: SafeArea(
+        child: Scaffold(
+          body: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [AppAppBar(), Expanded(child: child)],
+          ),
+          bottomNavigationBar: AppBottomNavigatorBar(),
+        ),
       ),
     );
   }

@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
       routerConfig: AppRouter.router,
+      builder:
+          (context, child) =>
+              Container(color: Theme.of(context).primaryColor, child: child),
     );
   }
 }
