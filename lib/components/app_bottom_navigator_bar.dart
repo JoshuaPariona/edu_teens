@@ -105,7 +105,7 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
                             child: Icon(
                               [
                                 AppIcons.home,
-                                AppIcons.understood,
+                                AppIcons.courses,
                                 AppIcons.chart,
                                 AppIcons.user,
                               ][i],

@@ -84,7 +84,7 @@ class AppLabel extends StatelessWidget {
             ...[
               SizedBox(width: style.horizontalGap),
               Icon(
-              AppIcons.xMark,
+              AppIcons.close,
               size: style.cancelIconSize,
               color:
                   filled ? style.filledCancelIconColor : style.cancelIconColor,
