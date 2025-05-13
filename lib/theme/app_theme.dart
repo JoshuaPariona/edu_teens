@@ -1,6 +1,7 @@
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_strings.dart';
 import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
+import 'package:edu_teens/theme/extensions/app_label_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/app_page_theme.dart';
 import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
@@ -41,19 +42,27 @@ class AppTheme {
       ),
       BottomNavTheme(style: buildBottomNavLightStyle()),
       AppAppBarTheme(style: buildAppAppBarLightStyle()),
-      AppPageTheme(style: buildAppPageLightStyle())
+      AppPageTheme(style: buildAppPageLightStyle()),
+      AppLabelVariantThemes(
+        neutral: buildNeutralLabelLightStyle(),
+        disabled: buildDisabledLabelLightStyle(),
+        primary: buildPrimaryLabelLightStyle(), //TODO: ceate build functions
+        secondary: buildPrimaryLabelLightStyle(),
+        tertiary: buildPrimaryLabelLightStyle(),
+        success: buildPrimaryLabelLightStyle(),
+        error: buildPrimaryLabelLightStyle(),
+        warning: buildPrimaryLabelLightStyle(),
+      ),
     ],
 
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: buildPrimaryButtonLightStyle()
+      style: buildPrimaryButtonLightStyle(),
     ),
 
-    textButtonTheme: TextButtonThemeData(
-      style: buildTextButtonLightStyle()
-    ),
+    textButtonTheme: TextButtonThemeData(style: buildTextButtonLightStyle()),
 
     iconButtonTheme: IconButtonThemeData(
-      style: buildPrimaryIconButtonLightStyle()
-    )
+      style: buildPrimaryIconButtonLightStyle(),
+    ),
   );
 }

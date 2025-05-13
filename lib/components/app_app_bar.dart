@@ -1,3 +1,5 @@
+import 'package:edu_teens/components/app_label.dart';
+import 'package:edu_teens/consts/app_icons.dart';
 import 'package:edu_teens/providers/scroll_controller_provider.dart';
 import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
 import 'package:edu_teens/utils.dart';
@@ -47,7 +49,12 @@ class _AppAppBarState extends State<AppAppBar> {
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                 
+                  AppLabel(
+                    label: "12500 puntos",
+                    type: AppLabelType.primary,
+                    icon: AppIcons.money,
+                    filled: false,
+                  ),
                 ],
               ),
             ],
