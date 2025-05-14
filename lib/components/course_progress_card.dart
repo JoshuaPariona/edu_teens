@@ -1,5 +1,4 @@
 import 'package:edu_teens/components/app_text.dart';
-import 'package:edu_teens/consts/app_icons.dart';
 import 'package:edu_teens/theme/extensions/course_progress_card_variant_themes.dart';
 import 'package:flutter/material.dart';
 

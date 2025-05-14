@@ -9,7 +9,7 @@ class AppRouter {
   static RouteInfo dashboardCurrentRouteInfo = AppRoutes.home;
 
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.dashboard.path,
+    initialLocation: AppRoutes.courses.path,
     routes: [
       GoRoute(
         path: AppRoutes.login.path,
@@ -25,6 +25,11 @@ class AppRouter {
         path: AppRoutes.onboarding.path,
         name: AppRoutes.onboarding.name,
         builder: (context, state) => const OnboardingPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.course.path,
+        name: AppRoutes.course.name,
+        builder: (context, state) => const CoursePage(),
       ),
       GoRoute(
         path: AppRoutes.dashboard.path,

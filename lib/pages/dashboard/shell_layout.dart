@@ -6,23 +6,18 @@ import 'package:provider/provider.dart';
 
 class DashboardLayout extends StatelessWidget {
   final Widget child;
-  const DashboardLayout({
-    super.key,
-    required this.child,
-  });
+  const DashboardLayout({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => ScrollControllerProvider(),
-      child: SafeArea(
-        child: Scaffold(
-          body: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [AppAppBar(), Expanded(child: child)],
-          ),
-          bottomNavigationBar: AppBottomNavigatorBar(),
+      child: Scaffold(
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [AppAppBar(), Expanded(child: child)],
         ),
+        bottomNavigationBar: AppBottomNavigatorBar(),
       ),
     );
   }

@@ -10,4 +10,5 @@ class AppImages {
   static const String tertiaryEllipse1 = 'assets/images/tertiary-ellipse1.png';
   static const String eduRM= 'assets/images/edu-rm.png';
   static const String primaryEllipse1 = 'assets/images/primary-ellipse1.png';
+  static const String eduSearch = 'assets/images/edu-search.png';
 }

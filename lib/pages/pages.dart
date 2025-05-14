@@ -6,4 +6,5 @@ export 'package:edu_teens/pages/dashboard/courses_page.dart';
 export 'package:edu_teens/pages/dashboard/home_page.dart';
 export 'package:edu_teens/pages/dashboard/profile_page.dart';
 export 'package:edu_teens/pages/dashboard/progress_page.dart';
+export 'package:edu_teens/pages/course_page.dart';
 export 'package:edu_teens/pages/test/ui_test.dart';

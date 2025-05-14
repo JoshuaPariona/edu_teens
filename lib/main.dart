@@ -18,9 +18,13 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
       routerConfig: AppRouter.router,
-      builder:
-          (context, child) =>
-              Container(color: Theme.of(context).primaryColor, child: child),
+      builder: (context, child) {
+        final c = child ?? const SizedBox();
+        return Container(
+          color: Theme.of(context).primaryColor,
+          child: SafeArea(child: c),
+        );
+      },
     );
   }
 }
