@@ -6,6 +6,7 @@ import 'package:edu_teens/components/course_progress_card.dart';
 import 'package:edu_teens/components/info_card.dart';
 import 'package:edu_teens/components/recommendation_card.dart';
 import 'package:edu_teens/consts/app_icons.dart';
+import 'package:edu_teens/data/courses.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -24,15 +25,19 @@ class HomePage extends StatelessWidget {
         AppSection(
           title: "Tus avances recientes",
           content: AppScrollList(
-            itemCount: 5,
             vertical: false,
-            builder:
-                (_) => CourseProgressCard(
-                  title: "Algebra",
-                  percentage: 0.2,
-                  type: CourseProgressCardType.secondary,
-                  icon: AppIcons.chart,
-                ),
+            children:
+                courses.map((course) {
+                  return CourseProgressCard(
+                    onTap: () => print("object"),
+                    title: course.name,
+                    percentage: course.progress,
+                    type: CourseProgressCardType.values.firstWhere(
+                      (type) => type.name == course.type,
+                    ),
+                    icon: AppIcons.getIcon(course.icon),
+                  );
+                }).toList(),
           ),
         ),
         AppSection(
@@ -44,7 +49,8 @@ class HomePage extends StatelessWidget {
               RecommendationCard(
                 label: "Geometria",
                 labelIcon: AppIcons.calculator,
-                message: "¡Casi logras dominar ángulos! Vamos un último repasito",
+                message:
+                    "¡Casi logras dominar ángulos! Vamos un último repasito",
                 type: RecommendationCardType.primary,
               ),
               RecommendationCard(
@@ -58,9 +64,9 @@ class HomePage extends StatelessWidget {
                 labelIcon: AppIcons.calculator,
                 message: "Cuadrantes necesita más práctica. ¡No lo dejes!",
                 type: RecommendationCardType.tertiary,
-              )
-            ]
-          )
+              ),
+            ],
+          ),
         ),
       ],
     );

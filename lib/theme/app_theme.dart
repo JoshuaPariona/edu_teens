@@ -71,10 +71,6 @@ class AppTheme {
       )
     ],
 
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: buildPrimaryButtonLightStyle(),
-    ),
-
     textButtonTheme: TextButtonThemeData(style: buildTextButtonLightStyle()),
 
     iconButtonTheme: IconButtonThemeData(
