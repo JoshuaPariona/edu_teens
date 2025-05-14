@@ -67,6 +67,7 @@ class AppLabel extends StatelessWidget {
         borderRadius: BorderRadius.circular(style.borderRadius),
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
             icon,

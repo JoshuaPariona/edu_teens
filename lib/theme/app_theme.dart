@@ -10,6 +10,7 @@ import 'package:edu_teens/theme/extensions/course_progress_card_variant_themes.d
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/info_card_theme.dart';
+import 'package:edu_teens/theme/extensions/recommendation_card_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/text_button_variant_themes.dart';
 import 'package:flutter/material.dart';
 
@@ -50,10 +51,10 @@ class AppTheme {
       AppLabelVariantThemes(
         neutral: buildNeutralLabelLightStyle(),
         disabled: buildDisabledLabelLightStyle(),
-        primary: buildPrimaryLabelLightStyle(), //TODO: ceate build functions
-        secondary: buildPrimaryLabelLightStyle(),
-        tertiary: buildPrimaryLabelLightStyle(),
-        success: buildPrimaryLabelLightStyle(),
+        primary: buildPrimaryLabelLightStyle(),
+        secondary: buildSecondaryLabelLightStyle(),
+        tertiary: buildTertiaryLabelLightStyle(),
+        success: buildPrimaryLabelLightStyle(), //TODO: ceate build functions
         error: buildPrimaryLabelLightStyle(),
         warning: buildPrimaryLabelLightStyle(),
       ),
@@ -62,6 +63,11 @@ class AppTheme {
         primary: buildPrimaryCourseProgressCardTLightStyle(),
         secondary: buildSecondaryCourseProgressCardTLightStyle(),
         tertiary: buildTertiaryCourseProgressCardTLightStyle()
+      ),
+      RecommendationCardTheme(
+        primary: buildPrimaryRecommendationCardTLightStyle(), 
+        secondary: buildSecondaryRecommendationCardTLightStyle(), 
+        tertiary: buildTertiaryRecommendationCardTLightStyle()
       )
     ],
 
