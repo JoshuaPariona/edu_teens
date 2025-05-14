@@ -35,6 +35,28 @@ LabelStyle buildPrimaryLabelLightStyle() {
   );
 }
 
+LabelStyle buildSecondaryLabelLightStyle() {
+  return LabelStyle(
+    backgroundColor: AppColors.secondarySoft,
+    foregroundColor: AppColors.secondaryHard,
+    cancelIconColor: AppColors.secondaryMedium,
+    filledBackgroundColor: AppColors.secondaryHard,
+    filledForegroundColor: AppColors.neutralInverted,
+    filledCancelIconColor: AppColors.secondaryMedium,
+  );
+}
+
+LabelStyle buildTertiaryLabelLightStyle() {
+  return LabelStyle(
+    backgroundColor: AppColors.tertiarySoft,
+    foregroundColor: AppColors.tertiaryHard,
+    cancelIconColor: AppColors.tertiaryHard,
+    filledBackgroundColor: AppColors.tertiaryHard,
+    filledForegroundColor: AppColors.neutralInverted,
+    filledCancelIconColor: AppColors.neutralInverted,
+  );
+}
+
 class LabelStyle {
   final double borderRadius = AppDimensions.spaceMedium;
   final double verticalPadding = AppDimensions.spaceSmall;
