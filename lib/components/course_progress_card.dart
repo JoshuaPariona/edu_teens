@@ -40,13 +40,8 @@ class CourseProgressCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<CourseProgressCardTheme>()!;
     final style = _selectStyle(theme);
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        padding: EdgeInsets.zero,
-      ),
-      onPressed: onTap,
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(style.padding),
         decoration: BoxDecoration(
@@ -65,7 +60,7 @@ class CourseProgressCard extends StatelessWidget {
               padding: EdgeInsets.all(style.padding),
               child: Center(
                 child: Icon(
-                  AppIcons.computer,
+                  icon,
                   size: style.iconSize,
                   color: style.iconForegroundColor,
                 ),

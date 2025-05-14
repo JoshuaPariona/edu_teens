@@ -36,7 +36,9 @@ class AppRouter {
       ),
       ShellRoute(
         builder: (context, state, child) {
-          return DashboardLayout(child: child);
+          return DashboardLayout(
+            child: child,
+          );
         },
         routes: [
           GoRoute(

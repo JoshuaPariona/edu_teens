@@ -20,6 +20,7 @@ class AppText extends StatelessWidget {
   final TextDecoration? decoration;
   final AppTextWeightType weight;
   final AppTextSizeType size;
+  final TextAlign textAlign;
   final Color color;
   final String text;
 
@@ -30,6 +31,7 @@ class AppText extends StatelessWidget {
     this.size = AppTextSizeType.body,
     this.color = AppColors.neutralBase,
     this.decoration,
+    this.textAlign = TextAlign.start,
   });
 
   double _getFontSize(AppTextSizeType size) {
@@ -72,6 +74,7 @@ class AppText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: textAlign,
       style: TextStyle(
         color: color,
         fontSize: _getFontSize(size),

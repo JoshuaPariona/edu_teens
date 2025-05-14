@@ -2,11 +2,16 @@ import 'package:edu_teens/consts/app_durations.dart';
 import 'package:flutter/material.dart';
 
 class ScrollControllerProvider with ChangeNotifier {
-  final ScrollController _scrollController = ScrollController();
+  late final ScrollController _scrollController;
+  double _lastOffset = 0;
   double _collapseOffset = 300;
   final double _maxOffset = 300;
 
   ScrollControllerProvider() {
+    _scrollController = ScrollController(
+      initialScrollOffset: _lastOffset,
+      onAttach: _handelAttach,
+    );
     _scrollController.addListener(_handleScroll);
   }
 
@@ -15,16 +20,32 @@ class ScrollControllerProvider with ChangeNotifier {
   double get maxOffset => _maxOffset;
 
   void _handleScroll() {
-    final double offset = _scrollController.offset.clamp(0, _maxOffset);
-    if (offset <= _maxOffset) {
-      _collapseOffset = _maxOffset - offset;
+    _lastOffset = _scrollController.offset.clamp(0, _maxOffset);
+    if (_lastOffset <= _maxOffset) {
+      _collapseOffset = _maxOffset - _lastOffset;
       notifyListeners();
+    }
+  }
+
+  void _handelAttach(ScrollPosition position) {
+    if (_scrollController.hasClients) {
+      Future.delayed(Duration.zero, () {
+        scrollTo(_lastOffset);
+      });
     }
   }
 
   void scrollToTop() {
     _scrollController.animateTo(
       0,
+      duration: AppDurations.scrollAnimation,
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void scrollTo(double offset) {
+    _scrollController.animateTo(
+      offset,
       duration: AppDurations.scrollAnimation,
       curve: Curves.easeInOut,
     );

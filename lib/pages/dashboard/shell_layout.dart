@@ -6,7 +6,10 @@ import 'package:provider/provider.dart';
 
 class DashboardLayout extends StatelessWidget {
   final Widget child;
-  const DashboardLayout({super.key, required this.child});
+  const DashboardLayout({
+    super.key,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {

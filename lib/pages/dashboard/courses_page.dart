@@ -1,3 +1,7 @@
+import 'package:edu_teens/components/app_page.dart';
+import 'package:edu_teens/components/course_card.dart';
+import 'package:edu_teens/consts/app_icons.dart';
+import 'package:edu_teens/data/courses.dart';
 import 'package:flutter/material.dart';
 
 class CoursesPage extends StatelessWidget {
@@ -5,6 +9,20 @@ class CoursesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return AppPage(
+      attachScrollController: false,
+      gridView: true,
+      children:
+          courses.map((course) {
+            return CourseCard(
+              onTap: () => print("object"),
+              title: course.name,
+              type: CourseCardType.values.firstWhere(
+                (type) => type.name == course.type,
+              ),
+              icon: AppIcons.getIcon(course.icon),
+            );
+          }).toList(),
+    );
   }
 }

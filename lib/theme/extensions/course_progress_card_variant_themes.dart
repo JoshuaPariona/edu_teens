@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_dimensions.dart';
 
-CourseProgressCardStyle buildPrimaryCourseProgressCardTLightStyle() {
+CourseProgressCardStyle buildPrimaryCourseProgressCardLightStyle() {
   return CourseProgressCardStyle(color: AppColors.primary);
 }
 
-CourseProgressCardStyle buildSecondaryCourseProgressCardTLightStyle() {
+CourseProgressCardStyle buildSecondaryCourseProgressCardLightStyle() {
   return CourseProgressCardStyle(color: AppColors.secondaryHard);
 }
 
-CourseProgressCardStyle buildTertiaryCourseProgressCardTLightStyle() {
+CourseProgressCardStyle buildTertiaryCourseProgressCardLightStyle() {
   return CourseProgressCardStyle(color: AppColors.tertiaryHard);
 }
 

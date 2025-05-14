@@ -6,6 +6,7 @@ import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
 import 'package:edu_teens/theme/extensions/app_label_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/app_page_theme.dart';
 import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
+import 'package:edu_teens/theme/extensions/course_card_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/course_progress_card_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
@@ -60,14 +61,19 @@ class AppTheme {
       ),
       InfoCardTheme(style: buildInfoCardLightStyle()),
       CourseProgressCardTheme(
-        primary: buildPrimaryCourseProgressCardTLightStyle(),
-        secondary: buildSecondaryCourseProgressCardTLightStyle(),
-        tertiary: buildTertiaryCourseProgressCardTLightStyle()
+        primary: buildPrimaryCourseProgressCardLightStyle(),
+        secondary: buildSecondaryCourseProgressCardLightStyle(),
+        tertiary: buildTertiaryCourseProgressCardLightStyle()
       ),
       RecommendationCardTheme(
-        primary: buildPrimaryRecommendationCardTLightStyle(), 
-        secondary: buildSecondaryRecommendationCardTLightStyle(), 
-        tertiary: buildTertiaryRecommendationCardTLightStyle()
+        primary: buildPrimaryRecommendationCardLightStyle(), 
+        secondary: buildSecondaryRecommendationCardLightStyle(), 
+        tertiary: buildTertiaryRecommendationCardLightStyle()
+      ),
+      CourseCardTheme(
+        primary: buildPrimaryCourseCardLightStyle(),
+        secondary: buildSecondaryCourseCardLightStyle(),
+        tertiary: buildTertiaryCourseCardLightStyle()
       )
     ],
 

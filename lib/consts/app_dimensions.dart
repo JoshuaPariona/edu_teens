@@ -24,6 +24,7 @@ class AppDimensions {
   static const double tabIconSize = 20;
   static const double appIconSize = 24;
   static const double labelIconSize = 12;
+  static const double inputIconSize = 14;
   static const double labelActionIconSize = 10;
   static const double avatarCircleRadius = 30;
 

@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_dimensions.dart';
 
-RecommendationCardStyle buildPrimaryRecommendationCardTLightStyle() {
+RecommendationCardStyle buildPrimaryRecommendationCardLightStyle() {
   return RecommendationCardStyle(
     backgroundColor: AppColors.primary_1,
     foregroundColor: AppColors.primary_5,
   );
 }
 
-RecommendationCardStyle buildSecondaryRecommendationCardTLightStyle() {
+RecommendationCardStyle buildSecondaryRecommendationCardLightStyle() {
   return RecommendationCardStyle(
     backgroundColor: AppColors.secondarySoft,
     foregroundColor: AppColors.secondaryHard,
   );
 }
 
-RecommendationCardStyle buildTertiaryRecommendationCardTLightStyle() {
+RecommendationCardStyle buildTertiaryRecommendationCardLightStyle() {
   return RecommendationCardStyle(
     backgroundColor: AppColors.tertiarySoft,
     foregroundColor: AppColors.tertiaryHard,

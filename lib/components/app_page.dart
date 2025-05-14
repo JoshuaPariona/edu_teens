@@ -1,5 +1,6 @@
 import 'package:edu_teens/providers/scroll_controller_provider.dart';
 import 'package:edu_teens/theme/extensions/app_page_theme.dart';
+import 'package:edu_teens/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,11 +8,13 @@ class AppPage extends StatelessWidget {
   final List<Widget> children;
   final bool attachScrollController;
   final bool topRounded;
+  final bool gridView;
   const AppPage({
     super.key,
     required this.children,
     this.attachScrollController = false,
     this.topRounded = true,
+    this.gridView = false,
   });
 
   List<Widget> _withVerticalGaps(List<Widget> originalSlivers, double gap) {
@@ -53,9 +56,25 @@ class AppPage extends StatelessWidget {
                 vertical: theme.style.verticalPadding,
                 horizontal: theme.style.horizontalPadding,
               ),
-              sliver: SliverList.list(
-                children: _withVerticalGaps(children, theme.style.verticalGap),
-              ),
+              sliver:
+                  gridView
+                      ? SliverGrid(
+                        gridDelegate:
+                            SliverGridDelegateWithFixedCrossAxisCountAndCentralizedLastElement(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: theme.style.verticalGap,
+                              crossAxisSpacing: theme.style.verticalGap,
+                              childAspectRatio: 5/4.5,
+                              itemCount: children.length,
+                            ),
+                        delegate: SliverChildListDelegate(children),
+                      )
+                      : SliverList.list(
+                        children: _withVerticalGaps(
+                          children,
+                          theme.style.verticalGap,
+                        ),
+                      ),
             ),
           ],
         ),
