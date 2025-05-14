@@ -32,9 +32,11 @@ class AppScrollList extends StatelessWidget {
             : buildWidgetArrayWithGap(itemCount!, gap, vertical, builder!);
 
     return SingleChildScrollView(
-      clipBehavior: Clip.none,
       scrollDirection: axis,
-      child: vertical ? Column(children: widgets) : Row(children: widgets),
+      child: Padding(
+        padding: EdgeInsets.all(4),
+        child: vertical ? Column(children: widgets) : Row(children: widgets),
+      ),
     );
   }
 }

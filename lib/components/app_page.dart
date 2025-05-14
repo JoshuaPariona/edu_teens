@@ -34,34 +34,31 @@ class AppPage extends StatelessWidget {
     );
     final theme = Theme.of(context).extension<AppPageTheme>()!;
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius:
-            topRounded
-                ? BorderRadius.only(
-                  topLeft: Radius.circular(theme.style.verticalPadding),
-                  topRight: Radius.circular(theme.style.verticalPadding),
-                )
-                : null,
-        color: theme.style.backgroundColor,
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(theme.style.verticalPadding),
+        topRight: Radius.circular(theme.style.verticalPadding),
       ),
-      child: CustomScrollView(
-        controller:
-            attachScrollController
-                ? scrollControllerProvider.scrollController
-                : null,
-        physics: ClampingScrollPhysics(),
-        slivers: [
-          SliverPadding(
-            padding: EdgeInsets.symmetric(
-              vertical: theme.style.verticalPadding,
-              horizontal: theme.style.horizontalPadding,
+      child: Container(
+        decoration: BoxDecoration(color: theme.style.backgroundColor),
+        child: CustomScrollView(
+          controller:
+              attachScrollController
+                  ? scrollControllerProvider.scrollController
+                  : null,
+          physics: ClampingScrollPhysics(),
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.symmetric(
+                vertical: theme.style.verticalPadding,
+                horizontal: theme.style.horizontalPadding,
+              ),
+              sliver: SliverList.list(
+                children: _withVerticalGaps(children, theme.style.verticalGap),
+              ),
             ),
-            sliver: SliverList.list(
-              children: _withVerticalGaps(children, theme.style.verticalGap),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
