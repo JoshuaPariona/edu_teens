@@ -2,7 +2,6 @@ import 'package:edu_teens/consts/app_strings.dart';
 import 'package:edu_teens/theme/app_theme.dart';
 import 'package:edu_teens/router/app_router.dart';
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MyApp());
 }

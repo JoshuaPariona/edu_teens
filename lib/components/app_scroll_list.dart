@@ -7,15 +7,19 @@ class AppScrollList extends StatelessWidget {
   final bool vertical;
   final double gap;
   final int? itemCount;
+  final double padding;
   final Widget Function(int)? builder;
+  final ScrollController? controller;
 
   const AppScrollList({
     super.key,
     this.children,
     this.vertical = false,
     this.gap = AppDimensions.spaceMedium,
+    this.padding = 0,
     this.itemCount,
-    this.builder,
+    this.builder, 
+    this.controller,
   }) : assert(
          (children != null && builder == null && itemCount == null) ||
              (children == null && builder != null && itemCount != null),
@@ -33,8 +37,9 @@ class AppScrollList extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: axis,
+      controller: controller,
       child: Padding(
-        padding: EdgeInsets.all(4),
+        padding: EdgeInsets.all(padding),
         child: vertical ? Column(children: widgets) : Row(children: widgets),
       ),
     );

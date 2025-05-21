@@ -1,6 +1,7 @@
+import 'package:edu_teens/components/app_progress_slider.dart';
 import 'package:edu_teens/components/app_text.dart';
-import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_dimensions.dart';
+import 'package:edu_teens/theme/extensions/course_overall_progress.dart';
 import 'package:flutter/material.dart';
 
 class CourseOverallProgress extends StatelessWidget {
@@ -14,9 +15,10 @@ class CourseOverallProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<CourseOverallProgressTheme>()!;
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.primary_1,
+        color: theme.style.backgroundColor,
         borderRadius: BorderRadius.circular(AppDimensions.spaceBorder),
       ),
       padding: const EdgeInsets.symmetric(
@@ -29,61 +31,34 @@ class CourseOverallProgress extends StatelessWidget {
             'Mi avance',
             size: AppTextSizeType.subtitle,
             weight: AppTextWeightType.medium,
-            color: AppColors.neutralBase,
+            color: theme.style.titleColor,
             textAlign: TextAlign.center,
           ),
+          SizedBox(height: AppDimensions.spaceSmall),
           SizedBox(
-            height: AppDimensions.spaceSmall,
-          ),
-          SizedBox(
-              width: double.infinity,
+            width: double.infinity,
+            height: 12,
+            child: AppProgressSlider(
+              foregroundColor: theme.style.sliderForegroundColor,
+              backgroundColor: theme.style.sliderBackGroundColor,
               height: 12,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final totalWidth = constraints.maxWidth;
-                  final progressWidth = totalWidth * progress;
-                  return Stack(
-                    children: [
-                      Container(
-                        width: totalWidth,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary_2,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                      Container(
-                        width: progressWidth,
-                        height: 12,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary_6,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+              progress: progress,
             ),
-          SizedBox(
-            height: AppDimensions.spaceSmall,
           ),
+          SizedBox(height: AppDimensions.spaceSmall),
           AppText(
             _getPercentageMsg(progress),
             size: AppTextSizeType.description,
             weight: AppTextWeightType.medium,
-            color: AppColors.primary_6,
+            color: theme.style.subtitleColor,
           ),
-          SizedBox(
-            height: AppDimensions.spaceSmall,
-          ),
+          SizedBox(height: AppDimensions.spaceSmall),
           AppText(
             '¡Estás muy cerca de terminar, sigue practicando!',
             size: AppTextSizeType.description,
             weight: AppTextWeightType.regular,
-            color: AppColors.neutralSubOrdinary,
+            color: theme.style.messageColor,
           ),
-          
         ],
       ),
     );

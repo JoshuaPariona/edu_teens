@@ -3,15 +3,19 @@ import 'package:edu_teens/consts/app_dimensions.dart';
 import 'package:edu_teens/consts/app_durations.dart';
 import 'package:edu_teens/consts/app_strings.dart';
 import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
+import 'package:edu_teens/theme/extensions/app_input_theme.dart';
 import 'package:edu_teens/theme/extensions/app_label_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/app_page_theme.dart';
+import 'package:edu_teens/theme/extensions/app_segmented_button_theme.dart';
 import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
 import 'package:edu_teens/theme/extensions/course_card_variant_themes.dart';
+import 'package:edu_teens/theme/extensions/course_overall_progress.dart';
 import 'package:edu_teens/theme/extensions/course_progress_card_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/info_card_theme.dart';
 import 'package:edu_teens/theme/extensions/recommendation_card_variant_themes.dart';
+import 'package:edu_teens/theme/extensions/subject_progress_card_theme.dart';
 import 'package:edu_teens/theme/extensions/text_button_variant_themes.dart';
 import 'package:flutter/material.dart';
 
@@ -63,18 +67,28 @@ class AppTheme {
       CourseProgressCardTheme(
         primary: buildPrimaryCourseProgressCardLightStyle(),
         secondary: buildSecondaryCourseProgressCardLightStyle(),
-        tertiary: buildTertiaryCourseProgressCardLightStyle()
+        tertiary: buildTertiaryCourseProgressCardLightStyle(),
       ),
       RecommendationCardTheme(
-        primary: buildPrimaryRecommendationCardLightStyle(), 
-        secondary: buildSecondaryRecommendationCardLightStyle(), 
-        tertiary: buildTertiaryRecommendationCardLightStyle()
+        primary: buildPrimaryRecommendationCardLightStyle(),
+        secondary: buildSecondaryRecommendationCardLightStyle(),
+        tertiary: buildTertiaryRecommendationCardLightStyle(),
       ),
       CourseCardTheme(
         primary: buildPrimaryCourseCardLightStyle(),
         secondary: buildSecondaryCourseCardLightStyle(),
-        tertiary: buildTertiaryCourseCardLightStyle()
-      )
+        tertiary: buildTertiaryCourseCardLightStyle(),
+      ),
+      AppInputTheme(style: buildAppInputLightStyle()),
+      AppSegmentedButtonTheme(
+        style: buildAppSegmentedButtonLightStyle(),
+      ),
+      CourseOverallProgressTheme(
+        style: buildCourseOverallProgressLightStyle(),
+      ),
+      SubjectProgressCardTheme(
+        style: buildSubjectProgressCardLightStyle(),
+      ),
     ],
 
     textButtonTheme: TextButtonThemeData(style: buildTextButtonLightStyle()),

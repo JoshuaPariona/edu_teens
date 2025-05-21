@@ -9,11 +9,9 @@ class NextButton extends StatelessWidget {
   final VoidCallback? onPress;
   final ValueChanged<bool>? onHover;
   final VoidCallback? onLongPress;
-  final bool isEnabled;
 
   const NextButton({
     required this.type,
-    required this.isEnabled,
     this.onPress,
     this.onHover,
     this.onLongPress,
@@ -41,9 +39,9 @@ class NextButton extends StatelessWidget {
 
     return IconButton(
       icon: Icon(AppIcons.right),
-      onPressed: isEnabled ? onPress : null,
-      onHover: isEnabled ? onHover : null,
-      onLongPress: isEnabled ? onLongPress : null,
+      onPressed: onPress,
+      onHover:onHover,
+      onLongPress: onLongPress,
       style: _selectStyle(theme),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:edu_teens/components/app_page.dart';
 import 'package:edu_teens/components/course_card.dart';
 import 'package:edu_teens/consts/app_icons.dart';
+import 'package:edu_teens/consts/app_routes.dart';
 import 'package:edu_teens/data/courses.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CoursesPage extends StatelessWidget {
   const CoursesPage({super.key});
@@ -10,12 +12,11 @@ class CoursesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage(
-      attachScrollController: false,
       gridView: true,
       children:
           courses.map((course) {
             return CourseCard(
-              onTap: () => print("object"),
+              onTap: () => context.pushNamed(AppRoutes.course.name),
               title: course.name,
               type: CourseCardType.values.firstWhere(
                 (type) => type.name == course.type,

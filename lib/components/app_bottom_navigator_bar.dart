@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 class AppBottomNavigatorBar extends StatefulWidget {
-  const AppBottomNavigatorBar({super.key});
+  final int currentIndex;
+  const AppBottomNavigatorBar({super.key, required this.currentIndex});
 
   @override
   State<AppBottomNavigatorBar> createState() => _AppBottomNavigatorBarState();
@@ -14,15 +15,12 @@ class AppBottomNavigatorBar extends StatefulWidget {
 
 class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
     with SingleTickerProviderStateMixin {
-  late int selectedIndex;
   late AnimationController _controller;
-
   bool isTabsDisabled = false;
 
   @override
   void initState() {
     super.initState();
-    selectedIndex = 0;
     _controller = AnimationController(
       vsync: this,
       duration: AppDurations.pageTransition,
@@ -31,13 +29,12 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
   }
 
   void _onTap(int index) {
-    if (index != selectedIndex) {
+    if (index != widget.currentIndex) {
       _controller.forward(from: 0);
       setState(() {
-        selectedIndex = index;
         isTabsDisabled = true;
       });
-      context.go(AppRoutes.dashboardTabs[index].path);
+      context.goNamed(AppRoutes.dashboardTabs[index].name);
       Future.delayed(
         AppDurations.pageTransition,
         () => setState(() {
@@ -50,11 +47,6 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).extension<BottomNavTheme>()!;
-    final location = GoRouterState.of(context).uri.toString();
-    final index = AppRoutes.dashboardTabs.indexWhere(
-      (route) => location.startsWith(route.path),
-    );
-    selectedIndex = index >= 0 ? index : 0;
     final indicatorWidth = theme.style.indicatorWidth;
     final indicatorHeight = theme.style.indicatorHeight;
     final indicatorTop = theme.style.verticalPadding;
@@ -71,7 +63,7 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
                 duration: theme.style.transitionDuration,
                 curve: Curves.easeInOut,
                 left:
-                    tabSectionWidth * selectedIndex +
+                    tabSectionWidth * widget.currentIndex +
                     tabSectionWidth / 2 -
                     indicatorWidth / 2,
                 top: indicatorTop,
@@ -87,7 +79,7 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: List.generate(AppRoutes.dashboardTabs.length, (i) {
-                  final isSelected = i == selectedIndex;
+                  final isSelected = i == widget.currentIndex;
                   return GestureDetector(
                     onTap: isTabsDisabled ? null : () => _onTap(i),
                     behavior: HitTestBehavior.opaque,
@@ -102,23 +94,28 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
                             padding: EdgeInsets.symmetric(
                               vertical: theme.style.iconVerticalPadding,
                             ),
-                            child: Icon(
-                              [
-                                AppIcons.home,
-                                AppIcons.courses,
-                                AppIcons.chart,
-                                AppIcons.user,
-                              ][i],
-                              size: theme.style.iconTabSize,
-                              color:
-                                  isSelected
-                                      ? theme.style.activeIconTabColor
-                                      : theme.style.iconTabColor,
+                            child: AnimatedSwitcher(
+                              duration: theme.style.transitionDuration,
+                              switchInCurve: Curves.easeInOut,
+                              child: Icon(
+                                [
+                                  AppIcons.home,
+                                  AppIcons.courses,
+                                  AppIcons.chart,
+                                  AppIcons.user,
+                                ][i],
+                                size: theme.style.iconTabSize,
+                                color:
+                                    isSelected
+                                        ? theme.style.activeIconTabColor
+                                        : theme.style.iconTabColor,
+                              ),
                             ),
                           ),
                           SizedBox(height: theme.style.verticalGap),
-                          Text(
-                            ["Inicio", "Cursos", "Progreso", "Mi perfil"][i],
+                          AnimatedDefaultTextStyle(
+                            duration: theme.style.transitionDuration,
+                            curve: Curves.easeInOut,
                             style: TextStyle(
                               fontSize: theme.style.labelSize,
                               color:
@@ -126,6 +123,9 @@ class _AppBottomNavigatorBarState extends State<AppBottomNavigatorBar>
                                       ? theme.style.activeLabelColor
                                       : theme.style.labelColor,
                               fontWeight: theme.style.labelFontWeight,
+                            ),
+                            child: Text(
+                              ["Inicio", "Cursos", "Progreso", "Mi perfil"][i],
                             ),
                           ),
                         ],

@@ -92,7 +92,6 @@ class _UiTestState extends State<UiTest> {
               children: [
                 NextButton(
                   type: NextButtonType.primary,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -100,7 +99,6 @@ class _UiTestState extends State<UiTest> {
                 SizedBox(height: 20),
                 NextButton(
                   type: NextButtonType.neutral,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -108,7 +106,6 @@ class _UiTestState extends State<UiTest> {
                 SizedBox(height: 20),
                 NextButton(
                   type: NextButtonType.outlined,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -116,7 +113,6 @@ class _UiTestState extends State<UiTest> {
                 SizedBox(height: 20),
                 NextButton(
                   type: NextButtonType.secondary,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },
@@ -124,7 +120,6 @@ class _UiTestState extends State<UiTest> {
                 SizedBox(height: 20),
                 NextButton(
                   type: NextButtonType.text,
-                  isEnabled: isEnabled,
                   onPress: () {
                     print("hi hi");
                   },

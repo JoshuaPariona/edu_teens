@@ -6,6 +6,7 @@ RecommendationCardStyle buildPrimaryRecommendationCardLightStyle() {
   return RecommendationCardStyle(
     backgroundColor: AppColors.primary_1,
     foregroundColor: AppColors.primary_5,
+    backgroundEllipseColor: AppColors.primary_3,
   );
 }
 
@@ -13,6 +14,7 @@ RecommendationCardStyle buildSecondaryRecommendationCardLightStyle() {
   return RecommendationCardStyle(
     backgroundColor: AppColors.secondarySoft,
     foregroundColor: AppColors.secondaryHard,
+    backgroundEllipseColor: AppColors.secondaryHard,
   );
 }
 
@@ -20,6 +22,7 @@ RecommendationCardStyle buildTertiaryRecommendationCardLightStyle() {
   return RecommendationCardStyle(
     backgroundColor: AppColors.tertiarySoft,
     foregroundColor: AppColors.tertiaryHard,
+    backgroundEllipseColor: AppColors.tertiaryHard,
   );
 }
 
@@ -29,10 +32,12 @@ class RecommendationCardStyle {
   final double borderRadius = AppDimensions.spaceBorder;
   final Color backgroundColor;
   final Color foregroundColor;
+  final Color backgroundEllipseColor;
 
   RecommendationCardStyle({
     required this.backgroundColor,
     required this.foregroundColor,
+    required this.backgroundEllipseColor,
   });
 }
 

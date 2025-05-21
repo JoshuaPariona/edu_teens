@@ -8,45 +8,73 @@ import 'package:edu_teens/consts/app_dimensions.dart';
 import 'package:edu_teens/consts/app_icons.dart';
 import 'package:edu_teens/consts/app_images.dart';
 import 'package:edu_teens/consts/app_routes.dart';
-import 'package:edu_teens/providers/scroll_controller_provider.dart';
+import 'package:edu_teens/providers/home_scroll_controller_provider.dart';
 import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
 import 'package:edu_teens/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class AppAppBar extends StatefulWidget {
-  const AppAppBar({super.key});
+  final int currentIndex;
+  const AppAppBar({super.key, required this.currentIndex});
 
   @override
   State<AppAppBar> createState() => _AppAppBarState();
 }
 
-class _AppAppBarState extends State<AppAppBar> with RouteAware {
+class _AppAppBarState extends State<AppAppBar> {
+  double bottom = -150;
+  final List<Timer> _timers = [];
 
   Widget _buildAnimatedImage(bool isCourses) {
     return AnimatedPositioned(
       duration: Duration(milliseconds: 800),
       curve: Curves.bounceOut,
       right: 0,
-      bottom: isCourses ? 0 : -150,
-      child: IgnorePointer(
-        child: Image.asset(AppImages.eduSearch),
-      ),
+      bottom: isCourses ? bottom : -150,
+      child: IgnorePointer(child: Image.asset(AppImages.eduSearch)),
     );
   }
 
-  Widget _buildCoursesTitle(ThemeData theme) {
-    return AppText(
-      "Cursos",
-      size: AppTextSizeType.h3,
-      weight: AppTextWeightType.medium,
-      color: theme.extension<AppAppBarTheme>()!.style.foregroundColor,
-    );
+  void _eduSearchAnimation() {
+    for (final timer in _timers) {
+      timer.cancel();
+    }
+    final showTimer = Timer(Duration(milliseconds: 200), () {
+      if (!mounted) return;
+      setState(() => bottom = 0);
+
+      final hideTimer = Timer(Duration(milliseconds: 2000), () {
+        if (!mounted) return;
+        setState(() => bottom = -150);
+      });
+
+      _timers.add(hideTimer);
+    });
+
+    _timers.add(showTimer);
   }
 
-  Widget _buildHomeContent(ThemeData theme, double height, double opacity) {
-    final appBarTheme = theme.extension<AppAppBarTheme>()!.style;
+  @override
+  void didUpdateWidget(oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _eduSearchAnimation();
+  }
+
+  @override
+  void dispose() {
+    for (final timer in _timers) {
+      timer.cancel();
+    }
+    _timers.clear();
+    super.dispose();
+  }
+
+  Widget _buildHomeContent(
+    AppAppBarTheme theme,
+    double height,
+    double opacity,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -55,8 +83,8 @@ class _AppAppBarState extends State<AppAppBar> with RouteAware {
           mainAxisSize: MainAxisSize.max,
           children: [
             CircleAvatar(
-              backgroundColor: appBarTheme.foregroundColor,
-              radius: appBarTheme.leadingSize,
+              backgroundColor: theme.style.foregroundColor,
+              radius: theme.style.leadingSize,
               child: Image.asset(AppImages.avatar),
             ),
             Row(
@@ -67,16 +95,15 @@ class _AppAppBarState extends State<AppAppBar> with RouteAware {
                   type: AppLabelType.primary,
                   icon: AppIcons.money,
                   filled: false,
-                  cancellable: true,
                 ),
-                SizedBox(width: appBarTheme.actionsGap),
+                SizedBox(width: theme.style.actionsGap),
                 Stack(
                   children: [
                     IconButton(
                       padding: EdgeInsets.zero,
                       icon: Icon(
                         AppIcons.notification,
-                        color: appBarTheme.foregroundColor,
+                        color: theme.style.foregroundColor,
                       ),
                       onPressed: () => print("notification"),
                     ),
@@ -95,7 +122,7 @@ class _AppAppBarState extends State<AppAppBar> with RouteAware {
                             "1",
                             size: AppTextSizeType.footnote,
                             weight: AppTextWeightType.medium,
-                            color: appBarTheme.foregroundColor,
+                            color: theme.style.foregroundColor,
                           ),
                         ),
                       ),
@@ -115,19 +142,19 @@ class _AppAppBarState extends State<AppAppBar> with RouteAware {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: appBarTheme.verticalGap),
+                  SizedBox(height: theme.style.verticalGap),
                   AppText(
                     "¡Bienvenida, Valery! ",
                     size: AppTextSizeType.h4,
                     weight: AppTextWeightType.medium,
-                    color: appBarTheme.foregroundColor,
+                    color: theme.style.foregroundColor,
                   ),
-                  SizedBox(height: appBarTheme.verticalFlexibleSpaceGap),
+                  SizedBox(height: theme.style.verticalFlexibleSpaceGap),
                   AppText(
                     "¿Lista para romperla con las mates hoy?",
                     size: AppTextSizeType.subtitle,
                     weight: AppTextWeightType.regular,
-                    color: appBarTheme.foregroundColor,
+                    color: theme.style.foregroundColor,
                   ),
                 ],
               ),
@@ -138,18 +165,53 @@ class _AppAppBarState extends State<AppAppBar> with RouteAware {
     );
   }
 
+  bool _handleTextChange(String text) {
+    return false;
+  }
+
+  Widget _buildVCoursesContent(AppAppBarTheme theme) {
+    return Column(
+      children: [
+        AppText(
+          "Cursos",
+          size: AppTextSizeType.h3,
+          weight: AppTextWeightType.medium,
+          color: theme.style.foregroundColor,
+        ),
+        SizedBox(height: theme.style.verticalGap),
+        AppInput(
+          placeHolder: "Buscar cursos o temas",
+          label: "Curso",
+          onTextChange: _handleTextChange,
+        ),
+      ],
+    );
+  }
+
+  Widget _selectAppBarContent(
+    AppAppBarTheme theme,
+    double height,
+    double opacity,
+  ) {
+    final route = AppRoutes.dashboardTabs[widget.currentIndex];
+    switch (route) {
+      case AppRoutes.home:
+        return _buildHomeContent(theme, height, opacity);
+      case AppRoutes.courses:
+        return _buildVCoursesContent(theme);
+      default:
+        return Container();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final scrollControllerProvider = context.watch<ScrollControllerProvider>();
-    final theme = Theme.of(context);
-    final appBarTheme = theme.extension<AppAppBarTheme>()!.style;
-    final location = GoRouter.of(context).state.name;
-
-    final isHome = location == AppRoutes.home.name;
-    final isCourses = location == AppRoutes.courses.name;
+    final scrollControllerProvider =
+        context.watch<HomeScrollControllerProvider>();
+    final theme = Theme.of(context).extension<AppAppBarTheme>()!;
 
     double height = interpolate(
-      maxBound: appBarTheme.flexibleSpaceExpandedHeight,
+      maxBound: theme.style.flexibleSpaceExpandedHeight,
       maxNumber: scrollControllerProvider.maxOffset,
       number: scrollControllerProvider.collapseOffset,
     );
@@ -161,24 +223,20 @@ class _AppAppBarState extends State<AppAppBar> with RouteAware {
     );
 
     return Stack(
+      clipBehavior: Clip.none,
       children: [
         Container(
-          color: appBarTheme.backgroundColor,
+          color: theme.style.backgroundColor,
+          width: double.infinity,
           padding: EdgeInsets.symmetric(
-            horizontal: appBarTheme.horizontalPadding,
-            vertical: appBarTheme.verticalPadding,
+            horizontal: theme.style.horizontalPadding,
+            vertical: theme.style.verticalPadding,
           ),
-          child: Column(
-            children: [
-              if (isCourses) _buildCoursesTitle(theme),
-              if (isHome) _buildHomeContent(theme, height, opacity),
-              if (isCourses)
-                SizedBox(height: appBarTheme.verticalGap),
-              if (isCourses) AppInput(placeHolder: "Buscar cursos o temas"),
-            ],
-          ),
+          child: _selectAppBarContent(theme, height, opacity),
         ),
-        _buildAnimatedImage(isCourses),
+        _buildAnimatedImage(
+          AppRoutes.dashboardTabs[widget.currentIndex] == AppRoutes.courses,
+        ),
       ],
     );
   }

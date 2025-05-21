@@ -42,7 +42,8 @@ class CourseCard extends StatelessWidget {
           boxShadow: [style.boxShadow],
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
               decoration: BoxDecoration(

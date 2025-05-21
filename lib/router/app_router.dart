@@ -1,16 +1,28 @@
-import 'package:edu_teens/consts/app_durations.dart';
 import 'package:edu_teens/consts/app_routes.dart';
 import 'package:edu_teens/pages/pages.dart';
+import 'package:edu_teens/pages/questions_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
   AppRouter._();
-  static RouteInfo dashboardCurrentRouteInfo = AppRoutes.home;
+
+  static int dashboardCurrentIndex = 0;
+
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter router = GoRouter(
-    initialLocation: AppRoutes.courses.path,
+    navigatorKey: _rootNavigatorKey,
+    initialLocation: AppRoutes.home.path,
     routes: [
+      GoRoute(
+        path: AppRoutes.root.path,
+        name: AppRoutes.root.name,
+        builder: (context, state) => const Placeholder(),
+        redirect: (context, state) {
+          return AppRoutes.dashboardTabs[dashboardCurrentIndex].path;
+        },
+      ),
       GoRoute(
         path: AppRoutes.login.path,
         name: AppRoutes.login.name,
@@ -29,132 +41,45 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.course.path,
         name: AppRoutes.course.name,
-        builder: (context, state) => const CoursePage(),
+        builder: (context, state) => CoursePage(),
+      ),
+      GoRoute(
+        path: AppRoutes.questions.path,
+        name: AppRoutes.questions.name,
+        builder: (context, state) => QuestionsPage(),
       ),
       GoRoute(
         path: AppRoutes.dashboard.path,
         name: AppRoutes.dashboard.name,
         builder: (context, state) => const Placeholder(),
         redirect: (context, state) {
-          return dashboardCurrentRouteInfo.path;
+          return AppRoutes.dashboardTabs[dashboardCurrentIndex].path;
         },
       ),
       ShellRoute(
         builder: (context, state, child) {
+          final name = state.topRoute!.name;
+          final index = AppRoutes.dashboardTabs.indexWhere(
+            (route) => route.name == name,
+          );
+          if (index != -1) {
+            AppRouter.dashboardCurrentIndex = index;
+          }
           return DashboardLayout(
+            currentIndex: dashboardCurrentIndex,
             child: child,
           );
         },
-        routes: [
-          GoRoute(
-            path: AppRoutes.home.path,
-            name: AppRoutes.home.name,
-            pageBuilder:
-                (context, state) => CustomTransitionPage(
-                  transitionDuration: AppDurations.pageTransition,
-                  reverseTransitionDuration: AppDurations.pageTransition,
-                  key: state.pageKey,
-                  child: HomePage(),
-                  transitionsBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                  ) {
-                    dashboardCurrentRouteInfo = AppRoutes.home;
-                    return SlideTransition(
-                      position: animation.drive(
-                        Tween(begin: Offset(-1.0, 0.0), end: Offset.zero),
-                      ),
-                      child: child,
-                    );
-                  },
-                ),
-          ),
-          GoRoute(
-            path: AppRoutes.courses.path,
-            name: AppRoutes.courses.name,
-            pageBuilder:
-                (context, state) => CustomTransitionPage(
-                  transitionDuration: AppDurations.pageTransition,
-                  reverseTransitionDuration: AppDurations.pageTransition,
-                  key: state.pageKey,
-                  child: CoursesPage(),
-                  transitionsBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                  ) {
-                    double dx = -1;
-                    if (dashboardCurrentRouteInfo == AppRoutes.home) {
-                      dx = 1;
-                    }
-                    dashboardCurrentRouteInfo = AppRoutes.courses;
-                    return SlideTransition(
-                      position: animation.drive(
-                        Tween(begin: Offset(dx, 0.0), end: Offset.zero),
-                      ),
-                      child: child,
-                    );
-                  },
-                ),
-          ),
-          GoRoute(
-            path: AppRoutes.progress.path,
-            name: AppRoutes.progress.name,
-            pageBuilder:
-                (context, state) => CustomTransitionPage(
-                  transitionDuration: AppDurations.pageTransition,
-                  reverseTransitionDuration: AppDurations.pageTransition,
-                  key: state.pageKey,
-                  child: ProgressPage(),
-                  transitionsBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                  ) {
-                    double dx = 1;
-                    if (dashboardCurrentRouteInfo == AppRoutes.profile) {
-                      dx = -1;
-                    }
-                    dashboardCurrentRouteInfo = AppRoutes.progress;
-                    return SlideTransition(
-                      position: animation.drive(
-                        Tween(begin: Offset(dx, 0.0), end: Offset.zero),
-                      ),
-                      child: child,
-                    );
-                  },
-                ),
-          ),
-          GoRoute(
-            path: AppRoutes.profile.path,
-            name: AppRoutes.profile.name,
-            pageBuilder:
-                (context, state) => CustomTransitionPage(
-                  transitionDuration: AppDurations.pageTransition,
-                  reverseTransitionDuration: AppDurations.pageTransition,
-                  key: state.pageKey,
-                  child: ProfilePage(),
-                  transitionsBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                    child,
-                  ) {
-                    dashboardCurrentRouteInfo = AppRoutes.profile;
-                    return SlideTransition(
-                      position: animation.drive(
-                        Tween(begin: Offset(1.0, 0.0), end: Offset.zero),
-                      ),
-                      child: child,
-                    );
-                  },
-                ),
-          ),
-        ],
+        routes:
+            AppRoutes.dashboardTabs
+                .map(
+                  (route) => GoRoute(
+                    path: route.path,
+                    name: route.name,
+                    builder: (context, state) => Placeholder(),
+                  ),
+                )
+                .toList(),
       ),
       GoRoute(path: '/test_ui', builder: (context, state) => UiTest()),
     ],

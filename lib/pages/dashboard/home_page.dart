@@ -7,15 +7,21 @@ import 'package:edu_teens/components/info_card.dart';
 import 'package:edu_teens/components/recommendation_card.dart';
 import 'package:edu_teens/consts/app_icons.dart';
 import 'package:edu_teens/data/courses.dart';
+import 'package:edu_teens/providers/home_scroll_controller_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final homeScrollControllerProvider =
+        Provider.of<HomeScrollControllerProvider>(context);
+      
     return AppPage(
-      attachScrollController: true,
+      scrollController: homeScrollControllerProvider.scrollController,
+      pageStorageKey: "home_page",
       children: [
         InfoCard(
           message: "¡Acepta el desafío y demuestra todo tu poder matemático!",
@@ -26,6 +32,7 @@ class HomePage extends StatelessWidget {
           title: "Tus avances recientes",
           content: AppScrollList(
             vertical: false,
+            padding: 4,
             children:
                 courses.map((course) {
                   return CourseProgressCard(
@@ -41,21 +48,21 @@ class HomePage extends StatelessWidget {
           ),
         ),
         AppSection(
-          title: "Tus avances recientes",
+          title: "Recomendaciones para ti",
           onSeeMore: () => print("object"),
           content: AppList(
             vertical: true,
             children: [
               RecommendationCard(
                 label: "Geometria",
-                labelIcon: AppIcons.calculator,
+                labelIcon: AppIcons.cone,
                 message:
                     "¡Casi logras dominar ángulos! Vamos un último repasito",
                 type: RecommendationCardType.primary,
               ),
               RecommendationCard(
                 label: "Algebra",
-                labelIcon: AppIcons.calculator,
+                labelIcon: AppIcons.formula,
                 message: "¡A mejorar se ha dicho! Reforzemos polinomios",
                 type: RecommendationCardType.secondary,
               ),

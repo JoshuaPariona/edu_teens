@@ -1,3 +1,4 @@
+import 'package:edu_teens/components/app_progress_slider.dart';
 import 'package:edu_teens/components/app_text.dart';
 import 'package:edu_teens/theme/extensions/course_progress_card_variant_themes.dart';
 import 'package:flutter/material.dart';
@@ -83,31 +84,11 @@ class CourseProgressCard extends StatelessWidget {
             SizedBox(
               width: 150,
               height: 8,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final totalWidth = constraints.maxWidth;
-                  final progressWidth = totalWidth * percentage;
-                  return Stack(
-                    children: [
-                      Container(
-                        width: totalWidth,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: style.sliderBackgroundColor,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      Container(
-                        width: progressWidth,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: style.color,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                    ],
-                  );
-                },
+              child: AppProgressSlider(
+                foregroundColor: style.color,
+                backgroundColor: style.sliderBackgroundColor,
+                height: 8,
+                progress: percentage,
               ),
             ),
           ],

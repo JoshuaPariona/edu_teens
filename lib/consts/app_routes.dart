@@ -1,5 +1,6 @@
 class AppRoutes {
   AppRoutes._();
+  static const RouteInfo root = _RouteInfo(p: "/", n: "root");
   static const RouteInfo login = _RouteInfo(p: "/login", n: "login");
   static const RouteInfo signin = _RouteInfo(p: "/signin", n: "signin");
   static const RouteInfo onboarding = _RouteInfo(
@@ -25,7 +26,9 @@ class AppRoutes {
   );
 
   static const RouteInfo course = _RouteInfo(p: "/course", n: "course");
+  static const RouteInfo questions = _RouteInfo(p: "/questions", n: "questions");
 
+  //in order to use the bottom navigator bar, the routes must be in the same order as the tabs
   static const List<RouteInfo> dashboardTabs = [
     home,
     courses,

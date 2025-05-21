@@ -21,7 +21,8 @@ class _CourseAppBarState extends State<CourseAppBar> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final appBarTheme = theme.extension<AppAppBarTheme>()!.style;
-    final scrollControllerProvider = context.watch<CoursePageScrollControllerProvider>();
+    final scrollControllerProvider =
+        context.watch<CoursePageScrollControllerProvider>();
 
     return Container(
       color: appBarTheme.backgroundColor,
@@ -43,11 +44,11 @@ class _CourseAppBarState extends State<CourseAppBar> {
             ],
           ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 800),
-            height: scrollControllerProvider.collapse? 0: null,
+            duration: Duration(milliseconds: 400),
+            height: scrollControllerProvider.collapse ? 0 : 200,
             child: AnimatedOpacity(
-              duration: Duration(milliseconds: 800),
-              opacity: scrollControllerProvider.collapse? 0: 1,
+              duration: Duration(milliseconds: 400),
+              opacity: scrollControllerProvider.collapse ? 0 : 1,
               child: SingleChildScrollView(
                 physics: NeverScrollableScrollPhysics(),
                 child: Column(

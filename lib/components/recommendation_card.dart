@@ -9,13 +9,11 @@ enum RecommendationCardType { primary, secondary, tertiary }
 class Bound {
   final RecommendationCardStyle style;
   final AppLabelType labelType;
-  final String backgroundImage;
   final String foregroundImage;
 
   const Bound({
     required this.style,
     required this.labelType,
-    required this.backgroundImage,
     required this.foregroundImage,
   });
 }
@@ -39,21 +37,18 @@ class RecommendationCard extends StatelessWidget {
     switch (type) {
       case RecommendationCardType.primary:
         return Bound(
-          backgroundImage: AppImages.primaryEllipse1,
           foregroundImage: AppImages.eduRM,
           style: theme.primary,
           labelType: AppLabelType.primary,
         );
       case RecommendationCardType.secondary:
         return Bound(
-          backgroundImage: AppImages.secondaryEllipse1,
           foregroundImage: AppImages.eduSurprise,
           style: theme.secondary,
           labelType: AppLabelType.secondary,
         );
       case RecommendationCardType.tertiary:
         return Bound(
-          backgroundImage: AppImages.tertiaryEllipse1,
           foregroundImage: AppImages.eduAlgebra,
           style: theme.tertiary,
           labelType: AppLabelType.tertiary,
@@ -66,21 +61,35 @@ class RecommendationCard extends StatelessWidget {
     final theme = Theme.of(context).extension<RecommendationCardTheme>()!;
     final bound = _selectBound(theme);
 
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(bound.style.borderRadius)),
-      child: Container(
+    return Container(
+      height: 180,
+      clipBehavior: Clip.hardEdge,
+      decoration: BoxDecoration(
         color: bound.style.backgroundColor,
-        width: double.infinity,
+        borderRadius: BorderRadius.all(
+          Radius.circular(bound.style.borderRadius),
+        ),
+      ),
+      width: double.infinity,
+      child: GestureDetector(
+        onTap: onPress,
         child: Stack(
           children: [
             Positioned(
-              top: 0,
-              right: 0,
-              bottom: 0,
-              child: Image.asset(bound.backgroundImage),
+              right: -100,
+              top: -50,
+              child: Container(
+                height: 280,
+                width: 280,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: bound.style.backgroundEllipseColor,
+                ),
+              ),
             ),
             Positioned(
               bottom: 0,
+              top: 0,
               right: 0,
               child: Image.asset(bound.foregroundImage),
             ),
