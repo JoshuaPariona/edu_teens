@@ -3,6 +3,7 @@ import 'package:edu_teens/components/app_scroll_list.dart';
 import 'package:edu_teens/components/app_segmented_button.dart';
 import 'package:edu_teens/components/course_app_bar.dart';
 import 'package:edu_teens/components/subject_progress_card.dart';
+import 'package:edu_teens/consts/app_dimensions.dart';
 import 'package:edu_teens/consts/app_durations.dart';
 import 'package:edu_teens/data/courses.dart';
 import 'package:edu_teens/providers/course_page_scroll_controller_provider.dart';
@@ -46,9 +47,9 @@ class CoursePage extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       controller: pageController,
                       children: [
-                        PageViewPage(),
-                        PageViewPage(),
-                        PageViewPage(),
+                        SubjectsSubPage(pageStorageKey: 'easy'),
+                        SubjectsSubPage(pageStorageKey: 'intermediate'),
+                        SubjectsSubPage(pageStorageKey: 'hard'),
                       ],
                     ),
                   ),
@@ -62,22 +63,24 @@ class CoursePage extends StatelessWidget {
   }
 }
 
-class PageViewPage extends StatelessWidget {
-  const PageViewPage({super.key});
+class SubjectsSubPage extends StatelessWidget {
+  final String pageStorageKey;
+  const SubjectsSubPage({super.key, required this.pageStorageKey});
 
   @override
   Widget build(BuildContext context) {
-    final scrollControllerProvider =
-        Provider.of<CoursePageScrollControllerProvider>(context);
+    //final scrollControllerProvider =
+    //Provider.of<CoursePageScrollControllerProvider>(context);
     return AppScrollList(
       vertical: true,
-      gap: 24,
-      controller: scrollControllerProvider.scrollController,
-      children: courses.first.subjects.map((subject) {
-        return SubjectProgressCard(
-          subject: subject,
-        );
-      }).toList(),
+      padding: 4,
+      gap: AppDimensions.spaceLarge,
+      key: PageStorageKey(pageStorageKey),
+      //controller: scrollControllerProvider.scrollController,
+      children:
+          courses.first.subjects.map((subject) {
+            return SubjectProgressCard(subject: subject);
+          }).toList(),
     );
   }
 }

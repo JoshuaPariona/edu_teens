@@ -1,4 +1,5 @@
 import 'package:edu_teens/consts/app_dimensions.dart';
+import 'package:edu_teens/consts/app_durations.dart';
 import 'package:flutter/material.dart';
 
 class AppProgressSlider extends StatelessWidget {
@@ -30,7 +31,8 @@ class AppProgressSlider extends StatelessWidget {
                 borderRadius: BorderRadius.circular(height/2),
               ),
             ),
-            Container(
+            AnimatedContainer(
+              duration: AppDurations.pageTransition,
               width: progressWidth,
               height: height,
               decoration: BoxDecoration(

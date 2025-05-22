@@ -1,86 +1,94 @@
 import 'package:edu_teens/data/courses.dart';
 import 'package:flutter/material.dart';
+import 'package:edu_teens/consts/app_durations.dart';
 
 class QuestionStateProvider with ChangeNotifier {
-  final PageController pageController = PageController(initialPage: 0);
-  double _points = 0;
-  int _currentQuestionIndex = 1;
-  int _questionCount = 10;
+  final PageController _pageController = PageController(initialPage: 0);
+  final int questionCount;
+  final int _correctPoints = 20;
+  final int _incorrectPoints = -5;
+  late final int _maxPoints;
+
+  int _points = 0;
+  int _currentQuestionIndex = 0;
+  bool _testComplete = false;
+
+  //must reset in each question
+  bool _completed = false;
   Option? _selectedOption;
-  bool _canNavigate = false;
+  bool _hasValidated = false;
+  bool? _validatedIsCorrect;
 
   int get currentQuestionIndex => _currentQuestionIndex;
-  double get points => _points;
-  PageController get controller => pageController;
-  int get questionCount => _questionCount;
-
+  int get points => _points;
+  int get maxPoints => _maxPoints;
+  PageController get pageController => _pageController;
   Option? get selectedOption => _selectedOption;
+  bool get completed => _completed;
+  bool get hasValidated => _hasValidated;
+  bool? get validatedIsCorrect => _validatedIsCorrect;
+  bool get testComplete => _testComplete;
 
-  bool get canNavigate => _canNavigate;
-
-
-  set questionCount(int count) {
-    _questionCount = count;
-    notifyListeners();
-  }
-
-  set currentQuestionIndex(int index) {
-    _currentQuestionIndex = index;
-    notifyListeners();
-  }
-
-  set points(double value) {
-    _points = value;
-    notifyListeners();
+  QuestionStateProvider({required this.questionCount}) {
+    _maxPoints = questionCount * _correctPoints;
   }
 
   void reset() {
-    _canNavigate = false;
+    _completed = false;
     _selectedOption = null;
-    _points = 0;
-    _currentQuestionIndex = 0;
-    questionCount = 0;
-    notifyListeners();
-  }
-
-  void badResponse() {
-    _points -= 5;
-    notifyListeners();
-  }
-
-  void correctResponse() {
-    _points += 10;
-    notifyListeners();
-  }
-
-  void nextQuestion() {
-    reset();
-    if (_currentQuestionIndex < _questionCount) {
-      _currentQuestionIndex++;
-      pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
+    _hasValidated = false;
+    _validatedIsCorrect = null;
+    _currentQuestionIndex = _pageController.page?.round() ?? 0;
+    if (_currentQuestionIndex >= questionCount - 1) {
+      _testComplete = true;
+    } else {
+      _testComplete = false;
     }
     notifyListeners();
   }
 
+  void badResponse() {
+    _points += _incorrectPoints;
+    _validatedIsCorrect = false;
+    notifyListeners();
+  }
+
+  void correctResponse() {
+    _points += _correctPoints;
+    _validatedIsCorrect = true;
+    notifyListeners();
+  }
+
+  void nextQuestion() {
+    if (!_completed) return;
+    if (_currentQuestionIndex >= questionCount - 1) return;
+
+    _pageController
+        .nextPage(
+          duration: AppDurations.pageTransition,
+          curve: Curves.easeInOut,
+        )
+        .then((_) {
+          reset();
+        });
+  }
+
   void selectOption(Option option) {
+    if (_completed) return;
     _selectedOption = option;
     notifyListeners();
   }
 
   void validateSelectedOption() {
-    if (_selectedOption != null) {
-      if (_selectedOption!.isCorrect) {
-        correctResponse();
-      } else {
-        badResponse();
-      }
-      _canNavigate = true;
+    if (_completed) return;
+    if (_selectedOption == null) return;
+    _hasValidated = true;
+    if (_selectedOption!.isCorrect) {
+      correctResponse();
     } else {
-      _canNavigate = false;
+      badResponse();
     }
+    _completed = true;
     notifyListeners();
   }
 }

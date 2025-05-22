@@ -32,11 +32,13 @@ class Option {
 
 class Question {
   final String id;
+  final String title;
   final String question;
   final List<Option> options;
 
   const Question({
     required this.id,
+    required this.title,
     required this.question,
     required this.options,
   });
@@ -75,7 +77,8 @@ final List<Course> courses = [
         questions: [
           Question(
             id: 'question1',
-            question: '¿Cuál es la solución de la ecuación x + 2 = 5?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: 'x + 2 = 5',
             options: [
               Option(id: 'option1', option: 'x = 3', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -85,8 +88,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question2',
-            question:
-                '¿Cuál es la solución de la ecuación 2x - 4 = 10?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '2x - 4 = 10',
             options: [
               Option(id: 'option1', option: 'x = 7', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -96,7 +99,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question3',
-            question: '¿Cuál es la solución de la ecuación 3x + 2 = 11?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '3x + 2 = 11',
             options: [
               Option(id: 'option1', option: 'x = 3', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -106,7 +110,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question4',
-            question: '¿Cuál es la solución de la ecuación 4x - 8 = 0?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '4x - 8 = 0',
             options: [
               Option(id: 'option1', option: 'x = 2', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -116,7 +121,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question5',
-            question: '¿Cuál es la solución de la ecuación 5x + 3 = 18?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '5x + 3 = 18',
             options: [
               Option(id: 'option1', option: 'x = 3', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -126,7 +132,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question6',
-            question: '¿Cuál es la solución de la ecuación 6x - 12 = 0?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '6x - 12 = 0',
             options: [
               Option(id: 'option1', option: 'x = 2', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -136,7 +143,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question7',
-            question: '¿Cuál es la solución de la ecuación 7x + 1 = 15?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '7x + 1 = 15',
             options: [
               Option(id: 'option1', option: 'x = 2', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -146,7 +154,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question8',
-            question: '¿Cuál es la solución de la ecuación 8x - 16 = 0?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '8x - 16 = 0',
             options: [
               Option(id: 'option1', option: 'x = 2', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -156,7 +165,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question9',
-            question: '¿Cuál es la solución de la ecuación 9x + 3 = 30?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '9x + 3 = 30',
             options: [
               Option(id: 'option1', option: 'x = 3', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -166,7 +176,8 @@ final List<Course> courses = [
           ),
           Question(
             id: 'question10',
-            question: '¿Cuál es la solución de la ecuación 10x - 20 = 0?',
+            title: '¿Cuál es la solución de la ecuación?',
+            question: '10x - 20 = 0',
             options: [
               Option(id: 'option1', option: 'x = 2', isCorrect: true),
               Option(id: 'option2', option: 'x = 5', isCorrect: false),
@@ -176,42 +187,17 @@ final List<Course> courses = [
           ),
         ],
       ),
-      Subject(
-        id: 'subject2',
-        order: 2,
-        name: 'Polinomios',
-        progress: 0.33,
-      ),
-      Subject(
-        id: 'subject3',
-        order: 3,
-        name: 'Funciones',
-        progress: 0,
-      ),
-      Subject(
-        id: 'subject4',
-        order: 4,
-        name: 'Inecuaciones',
-        progress: 0.6,
-      ),
+      Subject(id: 'subject2', order: 2, name: 'Polinomios', progress: 0.33),
+      Subject(id: 'subject3', order: 3, name: 'Funciones', progress: 0),
+      Subject(id: 'subject4', order: 4, name: 'Inecuaciones', progress: 0.6),
       Subject(
         id: 'subject5',
         order: 5,
         name: 'Sistemas de Ecuaciones',
         progress: 0.4,
       ),
-      Subject(
-        id: 'subject6',
-        order: 6,
-        name: 'Matrices',
-        progress: 0.7,
-      ),
-      Subject(
-        id: 'subject7',
-        order: 7,
-        name: 'Determinantes',
-        progress: 0.2,
-      ),
+      Subject(id: 'subject6', order: 6, name: 'Matrices', progress: 0.7),
+      Subject(id: 'subject7', order: 7, name: 'Determinantes', progress: 0.2),
     ],
   ),
   Course(

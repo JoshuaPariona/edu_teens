@@ -2,13 +2,16 @@ import 'package:edu_teens/components/app_button.dart';
 import 'package:edu_teens/components/app_label.dart';
 import 'package:edu_teens/components/app_list.dart';
 import 'package:edu_teens/components/app_page.dart';
+import 'package:edu_teens/components/app_progress_slider.dart';
 import 'package:edu_teens/components/app_text.dart';
 import 'package:edu_teens/components/next_button.dart';
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_icons.dart';
+import 'package:edu_teens/consts/app_routes.dart';
 import 'package:edu_teens/data/courses.dart';
 import 'package:edu_teens/providers/question_state_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class QuestionsPage extends StatelessWidget {
@@ -18,7 +21,10 @@ class QuestionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ChangeNotifierProvider(
-        create: (_) => QuestionStateProvider(),
+        create:
+            (_) => QuestionStateProvider(
+              questionCount: courses.first.subjects[0].questions.length,
+            ),
         builder: (context, child) {
           final questionStateProvider = Provider.of<QuestionStateProvider>(
             context,
@@ -40,7 +46,7 @@ class QuestionsPage extends StatelessWidget {
                                 courses.first.subjects[0].questions.map((
                                   question,
                                 ) {
-                                  return PageViewPage(question: question);
+                                  return OptionsSubPage(question: question);
                                 }).toList(),
                           ),
                         ),
@@ -65,7 +71,10 @@ class QuestionsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final questionStateProvider = Provider.of<QuestionStateProvider>(context);
     final points = questionStateProvider.points;
-    final index = questionStateProvider.currentQuestionIndex;
+    final maxPoints = questionStateProvider.maxPoints;
+    final progress =
+        (questionStateProvider.currentQuestionIndex + 1) /
+        questionStateProvider.questionCount;
 
     return Container(
       decoration: BoxDecoration(color: AppColors.primary),
@@ -80,12 +89,11 @@ class QuestionsAppBar extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(AppIcons.close),
+                icon: const Icon(AppIcons.close, color: AppColors.neutralInverted),
                 iconSize: 14,
-                color: AppColors.neutralInverted,
               ),
               AppLabel(
-                label: "$points/100",
+                label: "$points/$maxPoints",
                 type: AppLabelType.primary,
                 filled: false,
                 icon: AppIcons.star,
@@ -101,32 +109,10 @@ class QuestionsAppBar extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final totalWidth = constraints.maxWidth;
-              final progressWidth =
-                  totalWidth * 2 / 10;
-              return Stack(
-                children: [
-                  Container(
-                    width: totalWidth,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: AppColors.neutralSubOrdinary,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                  Container(
-                    width: progressWidth,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: AppColors.secondaryHard,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                  ),
-                ],
-              );
-            },
+          AppProgressSlider(
+            foregroundColor: AppColors.secondaryHard,
+            backgroundColor: AppColors.neutralSubOrdinary,
+            progress: progress,
           ),
         ],
       ),
@@ -153,12 +139,13 @@ class PageNavigation extends StatelessWidget {
         const SizedBox(width: 16),
         NextButton(
           onPress:
-              questionStateProvider.canNavigate
+              questionStateProvider.completed
                   ? () {
-                    questionStateProvider.nextQuestion();
+                    questionStateProvider.testComplete
+                        ? context.pop()
+                        : questionStateProvider.nextQuestion();
                   }
                   : null,
-
           type: NextButtonType.secondary,
         ),
       ],
@@ -166,9 +153,9 @@ class PageNavigation extends StatelessWidget {
   }
 }
 
-class PageViewPage extends StatelessWidget {
+class OptionsSubPage extends StatelessWidget {
   final Question question;
-  const PageViewPage({super.key, required this.question});
+  const OptionsSubPage({super.key, required this.question});
 
   @override
   Widget build(BuildContext context) {
@@ -178,18 +165,62 @@ class PageViewPage extends StatelessWidget {
       vertical: true,
       gap: 16,
       children: [
-        AppText(
-          question.question,
-          size: AppTextSizeType.h4,
-          weight: AppTextWeightType.regular,
-          color: AppColors.primary_7,
-          textAlign: TextAlign.center,
+        Column(
+          children: [
+            AppText(
+              question.title,
+              size: AppTextSizeType.h4,
+              weight: AppTextWeightType.medium,
+              color: AppColors.primary_7,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            AppText(
+              question.question,
+              size: AppTextSizeType.h4,
+              weight: AppTextWeightType.regular,
+              color: AppColors.neutralBase,
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
-        SizedBox(height: 16),
         ...question.options.map((option) {
+          final isSelected = questionStateProvider.selectedOption == option;
+          final hasValidated = questionStateProvider.hasValidated;
+          final validatedIsCorrect = questionStateProvider.validatedIsCorrect;
+
+          if (isSelected) {
+            if (hasValidated) {
+              if (validatedIsCorrect == true) {
+                return OptionCard(
+                  option: option,
+                  state: OptionCardState.correct,
+                  onTap: () {
+                    questionStateProvider.selectOption(option);
+                  },
+                );
+              } else {
+                return OptionCard(
+                  option: option,
+                  state: OptionCardState.incorrect,
+                  onTap: () {
+                    questionStateProvider.selectOption(option);
+                  },
+                );
+              }
+            } else {
+              return OptionCard(
+                option: option,
+                state: OptionCardState.selected,
+                onTap: () {
+                  questionStateProvider.selectOption(option);
+                },
+              );
+            }
+          }
           return OptionCard(
             option: option,
-            isSelected: questionStateProvider.selectedOption == option,
+            state: OptionCardState.idle,
             onTap: () {
               questionStateProvider.selectOption(option);
             },
@@ -200,17 +231,45 @@ class PageViewPage extends StatelessWidget {
   }
 }
 
+enum OptionCardState { idle, selected, correct, incorrect }
+
+class ColorBundle {
+  final Color? background;
+  final Color? border;
+
+  const ColorBundle({this.background, this.border});
+}
+
 class OptionCard extends StatelessWidget {
   final Option option;
-  final bool isSelected;
+  final OptionCardState state;
   final void Function() onTap;
 
   const OptionCard({
     super.key,
     required this.option,
-    required this.isSelected,
+    required this.state,
     required this.onTap,
   });
+
+  ColorBundle get colorBundle {
+    switch (state) {
+      case OptionCardState.idle:
+        return ColorBundle(background: AppColors.neutralDisabled);
+      case OptionCardState.selected:
+        return const ColorBundle(background: AppColors.primary_2);
+      case OptionCardState.correct:
+        return const ColorBundle(
+          background: AppColors.successSoft,
+          border: AppColors.successMedium,
+        );
+      case OptionCardState.incorrect:
+        return const ColorBundle(
+          background: AppColors.errorSoft,
+          border: AppColors.errorHard,
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -218,13 +277,22 @@ class OptionCard extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         width: double.infinity,
-        duration: const Duration(milliseconds: 250),
+        duration: const Duration(milliseconds: 400),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary_2 : Colors.black.withAlpha(15),
+          color: colorBundle.background,
+          border: Border.all(
+            color: colorBundle.border ?? Colors.transparent,
+            width: 2,
+          ),
           borderRadius: BorderRadius.circular(16),
         ),
-        child: AppText(option.option, textAlign: TextAlign.center),
+        child: AppText(
+          option.option,
+          size: AppTextSizeType.body,
+          weight: AppTextWeightType.regular,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

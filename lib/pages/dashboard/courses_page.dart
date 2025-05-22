@@ -12,6 +12,7 @@ class CoursesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppPage(
+      pageStorageKey: "courses_page",
       gridView: true,
       children:
           courses.map((course) {
