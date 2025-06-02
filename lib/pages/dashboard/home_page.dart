@@ -18,9 +18,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final homeScrollControllerProvider =
         Provider.of<HomeScrollControllerProvider>(context);
-      
+
     return AppPage(
-      scrollController: homeScrollControllerProvider.scrollController,
+      //scrollController: homeScrollControllerProvider.scrollController,
       pageStorageKey: "home_page",
       children: [
         InfoCard(
@@ -33,6 +33,7 @@ class HomePage extends StatelessWidget {
           content: AppScrollList(
             vertical: false,
             padding: 4,
+            pageStorageKey: "home_page_progress",
             children:
                 courses.map((course) {
                   return CourseProgressCard(
