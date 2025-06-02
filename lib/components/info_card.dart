@@ -23,6 +23,7 @@ class InfoCard extends StatelessWidget {
       borderRadius: BorderRadius.all(Radius.circular(theme.style.borderRadius)),
       child: Container(
         color: theme.style.backgroundColor,
+        width: double.infinity,
         child: Stack(
           children: [
             Positioned(

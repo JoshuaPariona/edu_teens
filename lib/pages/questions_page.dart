@@ -7,7 +7,6 @@ import 'package:edu_teens/components/app_text.dart';
 import 'package:edu_teens/components/next_button.dart';
 import 'package:edu_teens/consts/app_colors.dart';
 import 'package:edu_teens/consts/app_icons.dart';
-import 'package:edu_teens/consts/app_routes.dart';
 import 'package:edu_teens/data/courses.dart';
 import 'package:edu_teens/providers/question_state_provider.dart';
 import 'package:flutter/material.dart';

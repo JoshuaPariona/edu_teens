@@ -5,6 +5,7 @@ import 'package:edu_teens/consts/app_strings.dart';
 import 'package:edu_teens/theme/extensions/app_bar_theme.dart';
 import 'package:edu_teens/theme/extensions/app_input_theme.dart';
 import 'package:edu_teens/theme/extensions/app_label_variant_themes.dart';
+import 'package:edu_teens/theme/extensions/app_page_header_theme.dart';
 import 'package:edu_teens/theme/extensions/app_page_theme.dart';
 import 'package:edu_teens/theme/extensions/app_segmented_button_theme.dart';
 import 'package:edu_teens/theme/extensions/bottom_nav_theme.dart';
@@ -89,6 +90,7 @@ class AppTheme {
       SubjectProgressCardTheme(
         style: buildSubjectProgressCardLightStyle(),
       ),
+      AppPageHeaderTheme(style: buildAppPageHeaderLightStyle())
     ],
 
     textButtonTheme: TextButtonThemeData(style: buildTextButtonLightStyle()),

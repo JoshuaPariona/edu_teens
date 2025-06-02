@@ -4,6 +4,7 @@ import 'package:edu_teens/consts/app_dimensions.dart';
 
 AppPageStyle buildAppPageLightStyle() {
   return const AppPageStyle(
+    appBackgroundColor: AppColors.primary,
     backgroundColor: AppColors.neutralInverted,
     horizontalPadding: AppDimensions.spaceMedium,
     verticalPadding: AppDimensions.spaceLarge,
@@ -12,12 +13,14 @@ AppPageStyle buildAppPageLightStyle() {
 }
 
 class AppPageStyle {
+  final Color appBackgroundColor;
   final Color backgroundColor;
   final double horizontalPadding;
   final double verticalPadding;
   final double verticalGap;
 
   const AppPageStyle({
+    required this.appBackgroundColor,
     required this.backgroundColor,
     required this.horizontalPadding,
     required this.verticalPadding,

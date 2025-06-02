@@ -27,6 +27,7 @@ class AppDimensions {
   static const double inputIconSize = 14;
   static const double labelActionIconSize = 10;
   static const double avatarCircleRadius = 30;
+  static const double appBarContentHeight = 60;
 
   static const double flexibleSpaceExpandedHeight =
       spaceMedium + spaceMedium + spaceSmall + textHeader4 + textSubtitle;

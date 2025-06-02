@@ -2,26 +2,24 @@ import 'package:edu_teens/components/app_list.dart';
 import 'package:edu_teens/components/app_page.dart';
 import 'package:edu_teens/components/app_scroll_list.dart';
 import 'package:edu_teens/components/app_section.dart';
+import 'package:edu_teens/components/app_text.dart';
 import 'package:edu_teens/components/course_progress_card.dart';
 import 'package:edu_teens/components/info_card.dart';
 import 'package:edu_teens/components/recommendation_card.dart';
+import 'package:edu_teens/consts/app_dimensions.dart';
 import 'package:edu_teens/consts/app_icons.dart';
 import 'package:edu_teens/data/courses.dart';
-import 'package:edu_teens/providers/home_scroll_controller_provider.dart';
+import 'package:edu_teens/theme/extensions/app_page_header_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final homeScrollControllerProvider =
-        Provider.of<HomeScrollControllerProvider>(context);
-
     return AppPage(
-      //scrollController: homeScrollControllerProvider.scrollController,
       pageStorageKey: "home_page",
+      header: _HomeHeader(),
       children: [
         InfoCard(
           message: "¡Acepta el desafío y demuestra todo tu poder matemático!",
@@ -77,6 +75,41 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _HomeHeader extends StatelessWidget {
+  const _HomeHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).extension<AppPageHeaderTheme>()!;
+    return Container(
+      color: theme.style.backgroundColor,
+      padding: const EdgeInsets.only(
+        left: AppDimensions.spaceMedium,
+        right: AppDimensions.spaceMedium,
+        bottom: AppDimensions.spaceMedium,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppText(
+            "¡Bienvenida, Valery! ",
+            size: AppTextSizeType.h4,
+            weight: AppTextWeightType.medium,
+            color: theme.style.foregroundColor,
+          ),
+          SizedBox(height: AppDimensions.spaceSmall),
+          AppText(
+            "¿Lista para romperla con las mates hoy?",
+            size: AppTextSizeType.body,
+            weight: AppTextWeightType.regular,
+            color: theme.style.foregroundColor,
+          ),
+        ],
+      ),
     );
   }
 }

@@ -4,10 +4,8 @@ import 'package:edu_teens/pages/dashboard/courses_page.dart';
 import 'package:edu_teens/pages/dashboard/home_page.dart';
 import 'package:edu_teens/pages/dashboard/profile_page.dart';
 import 'package:edu_teens/pages/dashboard/progress_page.dart';
-import 'package:edu_teens/providers/home_scroll_controller_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:edu_teens/components/app_bottom_navigator_bar.dart';
-import 'package:provider/provider.dart';
 
 class DashboardLayout extends StatefulWidget {
   final Widget child;
@@ -42,30 +40,27 @@ class _DashboardLayoutState extends State<DashboardLayout> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => HomeScrollControllerProvider(),
-      child: Scaffold(
-        body: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            AppAppBar(currentIndex: widget.currentIndex),
-            Expanded(
-              child: PageView(
-                physics: const NeverScrollableScrollPhysics(),
-                controller: _pageController,
-                children: [
-                  HomePage(),
-                  CoursesPage(),
-                  ProgressPage(),
-                  ProfilePage(),
-                ],
-              ),
+    return Scaffold(
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          AppAppBar(currentIndex: widget.currentIndex),
+          Expanded(
+            child: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: _pageController,
+              children: [
+                HomePage(),
+                CoursesPage(),
+                ProgressPage(),
+                ProfilePage(),
+              ],
             ),
-          ],
-        ),
-        bottomNavigationBar: AppBottomNavigatorBar(
-          currentIndex: widget.currentIndex,
-        ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: AppBottomNavigatorBar(
+        currentIndex: widget.currentIndex,
       ),
     );
   }
