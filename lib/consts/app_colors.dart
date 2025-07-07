@@ -36,9 +36,9 @@ class AppColors {
   static const Color tertiaryHard = Color(0xff799fec);
   static const Color tertiaryHarder = Color(0xff133986);
 
-  static const Color successSoft = Color(0xffddf2e0);
-  static const Color successMedium = Color(0xff99d8a3);
-  static const Color successHard = Color(0xff34b248);
+  static const Color successSoft = Color(0xffEDF8EE);
+  static const Color successMedium = Color(0xffA3DCA8);
+  static const Color successHard = Color(0xff6FC978);
 
   static const Color warningSoft = Color(0xfffbf0dc);
   static const Color warningMedium = Color(0xfff3d297);

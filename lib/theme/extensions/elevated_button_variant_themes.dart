@@ -140,7 +140,7 @@ ButtonStyle buildSecondaryButtonLightStyle() {
     backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
       if (states.contains(WidgetState.disabled)) return AppColors.secondarySoft;
       if (states.contains(WidgetState.pressed))
-        return AppColors.secondaryHarder;
+        return AppColors.secondaryMedium;
       if (states.contains(WidgetState.hovered))
         return AppColors.secondaryMedium;
       return AppColors.secondaryHard;
@@ -148,9 +148,6 @@ ButtonStyle buildSecondaryButtonLightStyle() {
     foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
       if (states.contains(WidgetState.disabled))
         return AppColors.neutralDisabled;
-      if (states.contains(WidgetState.pressed))
-        return AppColors.neutralInverted;
-      if (states.contains(WidgetState.hovered)) return AppColors.neutralBase;
       return AppColors.neutralBase;
     }),
     elevation: WidgetStateProperty.resolveWith<double>((states) {
