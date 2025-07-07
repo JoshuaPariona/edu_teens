@@ -70,16 +70,28 @@ class AppRouter {
             child: child,
           );
         },
-        routes:
-            AppRoutes.dashboardTabs
-                .map(
-                  (route) => GoRoute(
-                    path: route.path,
-                    name: route.name,
-                    builder: (context, state) => Placeholder(),
-                  ),
-                )
-                .toList(),
+        routes: [
+          GoRoute(
+            path: AppRoutes.home.path,
+            name: AppRoutes.home.name,
+            builder: (context, state) => Placeholder(),
+          ),
+          GoRoute(
+            path: AppRoutes.courses.path,
+            name: AppRoutes.courses.name,
+            builder: (context, state) => Placeholder(),
+          ),
+          GoRoute(
+            path: AppRoutes.progress.path,
+            name: AppRoutes.progress.name,
+            builder: (context, state) => Placeholder(),
+          ),
+          GoRoute(
+            path: AppRoutes.profile.path,
+            name: AppRoutes.profile.name,
+            builder: (context, state) => Placeholder(),
+          ),
+        ],
       ),
       GoRoute(path: '/test_ui', builder: (context, state) => UiTest()),
     ],
