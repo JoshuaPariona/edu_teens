@@ -13,6 +13,7 @@ import 'package:edu_teens/theme/extensions/course_card_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/course_overall_progress.dart';
 import 'package:edu_teens/theme/extensions/course_progress_card_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/elevated_button_variant_themes.dart';
+import 'package:edu_teens/theme/extensions/grade_card_theme.dart';
 import 'package:edu_teens/theme/extensions/icon_button_variant_themes.dart';
 import 'package:edu_teens/theme/extensions/info_card_theme.dart';
 import 'package:edu_teens/theme/extensions/recommendation_card_variant_themes.dart';
@@ -90,7 +91,8 @@ class AppTheme {
       SubjectProgressCardTheme(
         style: buildSubjectProgressCardLightStyle(),
       ),
-      AppPageHeaderTheme(style: buildAppPageHeaderLightStyle())
+      AppPageHeaderTheme(style: buildAppPageHeaderLightStyle()),
+      GradeCardTheme(style: buildGradeCardLightStyle())
     ],
 
     textButtonTheme: TextButtonThemeData(style: buildTextButtonLightStyle()),

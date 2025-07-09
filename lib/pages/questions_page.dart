@@ -6,6 +6,7 @@ import 'package:edu_teens/components/app_progress_slider.dart';
 import 'package:edu_teens/components/app_text.dart';
 import 'package:edu_teens/components/next_button.dart';
 import 'package:edu_teens/consts/app_colors.dart';
+import 'package:edu_teens/consts/app_dimensions.dart';
 import 'package:edu_teens/consts/app_icons.dart';
 import 'package:edu_teens/data/courses.dart';
 import 'package:edu_teens/providers/question_state_provider.dart';
@@ -54,7 +55,11 @@ class QuestionsPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Positioned(bottom: 24, right: 16, child: PageNavigation()),
+              Positioned(
+                bottom: AppDimensions.spaceLarge,
+                right: AppDimensions.spaceMedium,
+                child: PageNavigation(),
+              ),
             ],
           );
         },
@@ -88,7 +93,10 @@ class QuestionsAppBar extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(AppIcons.close, color: AppColors.neutralInverted),
+                icon: const Icon(
+                  AppIcons.close,
+                  color: AppColors.neutralInverted,
+                ),
                 iconSize: 14,
               ),
               AppLabel(

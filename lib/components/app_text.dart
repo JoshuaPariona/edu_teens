@@ -20,6 +20,7 @@ class AppText extends StatelessWidget {
   final TextDecoration? decoration;
   final AppTextWeightType weight;
   final AppTextSizeType size;
+  final double? customSize;
   final TextAlign textAlign;
   final Color color;
   final String text;
@@ -32,9 +33,13 @@ class AppText extends StatelessWidget {
     this.color = AppColors.neutralBase,
     this.decoration,
     this.textAlign = TextAlign.start,
+    this.customSize,
   });
 
   double _getFontSize(AppTextSizeType size) {
+    if (customSize != null) {
+      return customSize!;
+    }
     switch (size) {
       case AppTextSizeType.h1:
         return AppDimensions.textHeader1;

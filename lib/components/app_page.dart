@@ -21,15 +21,21 @@ class AppPage extends StatelessWidget {
   final bool scroll;
   final ScrollController? scrollController;
   final String? pageStorageKey;
+  final bool topPaddingFixed;
+  final double childAspectRatio;
+  final bool withPadding;
   const AppPage({
     super.key,
     required this.children,
     this.header,
+    this.childAspectRatio = 5 / 4.5,
     this.topRounded = true,
     this.scroll = true,
     this.gridView = false,
+    this.topPaddingFixed = true,
     this.scrollController,
     this.pageStorageKey,
+    this.withPadding = true,
   });
 
   @override
@@ -44,12 +50,16 @@ class AppPage extends StatelessWidget {
           gridView: gridView,
           theme: theme,
           header: header,
+          topPaddingFixed: topPaddingFixed,
+          childAspectRatio: childAspectRatio,
+          withPadding: withPadding,
           children: children,
         )
         : _PageView(
           theme: theme,
           header: header,
           topRounded: topRounded,
+          withPadding: withPadding,
           children: children,
         );
   }
@@ -60,9 +70,11 @@ class _PageView extends StatelessWidget {
   final List<Widget> children;
   final AppPageTheme theme;
   final bool topRounded;
+  final bool withPadding;
   const _PageView({
     required this.children,
     required this.topRounded,
+    required this.withPadding,
     required this.theme,
     this.header,
   });
@@ -76,10 +88,13 @@ class _PageView extends StatelessWidget {
         header != null ? header! : SizedBox(),
         Expanded(
           child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: theme.style.verticalPadding,
-              horizontal: theme.style.horizontalPadding,
-            ),
+            padding:
+                withPadding
+                    ? EdgeInsets.symmetric(
+                      vertical: theme.style.verticalPadding,
+                      horizontal: theme.style.horizontalPadding,
+                    )
+                    : null,
             decoration: BoxDecoration(
               color: theme.style.backgroundColor,
               borderRadius: BorderRadius.only(
@@ -95,7 +110,10 @@ class _PageView extends StatelessWidget {
             ),
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              children: _withVerticalGaps(children, theme.style.verticalGap),
+              children: [
+                SizedBox(width: double.infinity),
+                ..._withVerticalGaps(children, theme.style.verticalGap),
+              ],
             ),
           ),
         ),
@@ -112,11 +130,17 @@ class _PageCustomScrollView extends StatelessWidget {
   final List<Widget> children;
   final AppPageTheme theme;
   final String? pageStorageKey;
+  final bool topPaddingFixed;
+  final double childAspectRatio;
+  final bool withPadding;
   const _PageCustomScrollView({
     required this.gridView,
     required this.children,
     required this.theme,
     required this.topRounded,
+    required this.topPaddingFixed,
+    required this.childAspectRatio,
+    required this.withPadding,
     this.header,
     this.scrollController,
     this.pageStorageKey,
@@ -135,39 +159,44 @@ class _PageCustomScrollView extends StatelessWidget {
         physics: ClampingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(child: header),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: StickyHeaderDelegate(
-              child: Container(
-                color: theme.style.appBackgroundColor,
+          if (topPaddingFixed && withPadding)
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: StickyHeaderDelegate(
                 child: Container(
-                  decoration: BoxDecoration(
-                    color: theme.style.backgroundColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft:
-                          topRounded
-                              ? Radius.circular(theme.style.verticalPadding)
-                              : Radius.zero,
-                      topRight:
-                          topRounded
-                              ? Radius.circular(theme.style.verticalPadding)
-                              : Radius.zero,
+                  color: theme.style.appBackgroundColor,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: theme.style.backgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft:
+                            topRounded
+                                ? Radius.circular(theme.style.verticalPadding)
+                                : Radius.zero,
+                        topRight:
+                            topRounded
+                                ? Radius.circular(theme.style.verticalPadding)
+                                : Radius.zero,
+                      ),
                     ),
                   ),
                 ),
+                minHeight: theme.style.verticalPadding,
+                maxHeight: theme.style.verticalPadding,
               ),
-              minHeight: theme.style.verticalPadding,
-              maxHeight: theme.style.verticalPadding,
             ),
-          ),
           SliverToBoxAdapter(
             child: Container(
               width: double.infinity,
-              padding: EdgeInsets.only(
-                bottom: theme.style.verticalPadding,
-                left: theme.style.horizontalPadding,
-                right: theme.style.horizontalPadding,
-              ),
+              padding:
+                  withPadding
+                      ? EdgeInsets.only(
+                        top: topPaddingFixed ? 0 : theme.style.verticalPadding,
+                        bottom: theme.style.verticalPadding,
+                        left: theme.style.horizontalPadding,
+                        right: theme.style.horizontalPadding,
+                      )
+                      : null,
               color: theme.style.backgroundColor,
               child:
                   gridView
@@ -180,7 +209,7 @@ class _PageCustomScrollView extends StatelessWidget {
                               crossAxisCount: 2,
                               mainAxisSpacing: theme.style.verticalGap,
                               crossAxisSpacing: theme.style.verticalGap,
-                              childAspectRatio: 5 / 4.5,
+                              childAspectRatio: childAspectRatio,
                               itemCount: children.length,
                             ),
                         itemBuilder: (context, index) => children[index],
