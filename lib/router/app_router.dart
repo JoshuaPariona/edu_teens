@@ -13,7 +13,7 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: AppRoutes.home.path,
+    initialLocation: AppRoutes.signin.path,
     routes: [
       GoRoute(
         path: AppRoutes.root.path,
@@ -24,9 +24,9 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: AppRoutes.login.path,
-        name: AppRoutes.login.name,
-        builder: (context, state) => const LoginPage(),
+        path: AppRoutes.signup.path,
+        name: AppRoutes.signup.name,
+        builder: (context, state) => const SignUpPage(),
       ),
       GoRoute(
         path: AppRoutes.signin.path,

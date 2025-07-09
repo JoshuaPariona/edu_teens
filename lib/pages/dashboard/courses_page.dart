@@ -33,11 +33,22 @@ class CoursesPage extends StatelessWidget {
   }
 }
 
-class _CoursesPageHeader extends StatelessWidget {
-  const _CoursesPageHeader();
+class _CoursesPageHeader extends StatefulWidget {
+  @override
+  State<_CoursesPageHeader> createState() => __CoursesPageHeaderState();
+}
+
+class __CoursesPageHeaderState extends State<_CoursesPageHeader> {
+  final FocusNode _focusNode = FocusNode();
 
   bool _handleTextChange(String text) {
     return false;
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -53,6 +64,7 @@ class _CoursesPageHeader extends StatelessWidget {
       child: AppInput(
         placeHolder: "Buscar cursos o temas",
         label: "Curso",
+        focusNode: _focusNode,
         onTextChange: _handleTextChange,
       ),
     );

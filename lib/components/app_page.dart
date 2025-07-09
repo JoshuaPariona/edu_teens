@@ -40,12 +40,18 @@ class AppPage extends StatelessWidget {
         ? _PageCustomScrollView(
           scrollController: scrollController,
           pageStorageKey: pageStorageKey,
+          topRounded: topRounded,
           gridView: gridView,
           theme: theme,
           header: header,
           children: children,
         )
-        : _PageView(theme: theme, header: header, children: children);
+        : _PageView(
+          theme: theme,
+          header: header,
+          topRounded: topRounded,
+          children: children,
+        );
   }
 }
 
@@ -53,7 +59,13 @@ class _PageView extends StatelessWidget {
   final Widget? header;
   final List<Widget> children;
   final AppPageTheme theme;
-  const _PageView({required this.children, required this.theme, this.header});
+  final bool topRounded;
+  const _PageView({
+    required this.children,
+    required this.topRounded,
+    required this.theme,
+    this.header,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +83,14 @@ class _PageView extends StatelessWidget {
             decoration: BoxDecoration(
               color: theme.style.backgroundColor,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(theme.style.verticalPadding),
-                topRight: Radius.circular(theme.style.verticalPadding),
+                topLeft:
+                    topRounded
+                        ? Radius.circular(theme.style.verticalPadding)
+                        : Radius.zero,
+                topRight:
+                    topRounded
+                        ? Radius.circular(theme.style.verticalPadding)
+                        : Radius.zero,
               ),
             ),
             child: Column(
@@ -88,6 +106,7 @@ class _PageView extends StatelessWidget {
 
 class _PageCustomScrollView extends StatelessWidget {
   final ScrollController? scrollController;
+  final bool topRounded;
   final Widget? header;
   final bool gridView;
   final List<Widget> children;
@@ -97,6 +116,7 @@ class _PageCustomScrollView extends StatelessWidget {
     required this.gridView,
     required this.children,
     required this.theme,
+    required this.topRounded,
     this.header,
     this.scrollController,
     this.pageStorageKey,
@@ -124,8 +144,14 @@ class _PageCustomScrollView extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: theme.style.backgroundColor,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(theme.style.verticalPadding),
-                      topRight: Radius.circular(theme.style.verticalPadding),
+                      topLeft:
+                          topRounded
+                              ? Radius.circular(theme.style.verticalPadding)
+                              : Radius.zero,
+                      topRight:
+                          topRounded
+                              ? Radius.circular(theme.style.verticalPadding)
+                              : Radius.zero,
                     ),
                   ),
                 ),

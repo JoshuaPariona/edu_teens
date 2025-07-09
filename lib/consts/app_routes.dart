@@ -1,7 +1,7 @@
 class AppRoutes {
   AppRoutes._();
   static const RouteInfo root = _RouteInfo(p: "/", n: "root");
-  static const RouteInfo login = _RouteInfo(p: "/login", n: "login");
+  static const RouteInfo signup = _RouteInfo(p: "/signup", n: "signup");
   static const RouteInfo signin = _RouteInfo(p: "/signin", n: "signin");
   static const RouteInfo onboarding = _RouteInfo(
     p: "/onboarding",

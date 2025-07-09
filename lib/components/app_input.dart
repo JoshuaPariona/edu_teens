@@ -4,18 +4,26 @@ import 'package:edu_teens/consts/app_icons.dart';
 import 'package:edu_teens/theme/extensions/app_input_theme.dart';
 import 'package:flutter/material.dart';
 
-enum _AppInputLocalState { error, focus, blur, disabled }
+enum _AppInputLocalState { focus, blur, disabled }
 
 class AppInput extends StatefulWidget {
+  final FocusNode focusNode;
+  final IconData? leadingIcon;
   final String placeHolder;
   final String label;
+  final bool private;
+  final TextInputType? keyboardType;
   final bool Function(String)? onTextChange;
   final bool Function(String)? onSubmit;
 
   const AppInput({
     super.key,
+    required this.focusNode,
     required this.placeHolder,
     required this.label,
+    this.keyboardType,
+    this.private = false,
+    this.leadingIcon,
     this.onTextChange,
     this.onSubmit,
   });
@@ -26,23 +34,25 @@ class AppInput extends StatefulWidget {
 
 class _AppInputState extends State<AppInput> {
   final TextEditingController _controller = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
   late _AppInputLocalState _state;
+  late bool obscureText;
+  bool error = false;
 
   @override
   void initState() {
     super.initState();
+    obscureText = widget.private;
     final isDisabled = widget.onTextChange == null && widget.onSubmit == null;
     _state =
         isDisabled ? _AppInputLocalState.disabled : _AppInputLocalState.blur;
-    _focusNode.addListener(_handleFocusChange);
+    widget.focusNode.addListener(_handleFocusChange);
     _controller.addListener(_handleTextChange);
   }
 
   void _handleFocusChange() {
     setState(() {
       _state =
-          _focusNode.hasFocus
+          widget.focusNode.hasFocus
               ? _AppInputLocalState.focus
               : _AppInputLocalState.blur;
     });
@@ -51,31 +61,28 @@ class _AppInputState extends State<AppInput> {
   void _handleTextChange() {
     if (widget.onTextChange != null) {
       setState(() {
-        final error = widget.onTextChange!(_controller.text);
-        _state = error ? _AppInputLocalState.error : _AppInputLocalState.focus;
+        error = widget.onTextChange!(_controller.text);
       });
     }
   }
 
   void _handleSubmit(String text) {
     if (widget.onSubmit != null) {
-      setState(() {
-        final error = widget.onSubmit!(text);
-        _state = error ? _AppInputLocalState.error : _AppInputLocalState.blur;
-      });
+      error = widget.onSubmit!(text);
     }
   }
 
   Color _selectColor({
-    Color? error,
+    Color? err,
     Color? blur,
     Color? focus,
     Color? disabled,
     required Color defaultColor,
   }) {
+    if (error) {
+      return err ?? defaultColor;
+    }
     switch (_state) {
-      case _AppInputLocalState.error:
-        return error ?? defaultColor;
       case _AppInputLocalState.blur:
         return blur ?? defaultColor;
       case _AppInputLocalState.focus:
@@ -87,7 +94,6 @@ class _AppInputState extends State<AppInput> {
 
   @override
   void dispose() {
-    _focusNode.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -110,7 +116,7 @@ class _AppInputState extends State<AppInput> {
             border: Border.all(
               color: _selectColor(
                 focus: theme.style.focusBorderColor,
-                error: theme.style.errorColor,
+                err: theme.style.errorColor,
                 defaultColor: theme.style.borderColor,
               ),
               width: 2,
@@ -119,14 +125,12 @@ class _AppInputState extends State<AppInput> {
         ),
         Positioned(
           left: theme.style.horizontalPadding,
-          top:
-              theme.style.height / 2 -
-              AppDimensions.inputIconSize / 2,
+          top: theme.style.height / 2 - AppDimensions.inputIconSize / 2,
           child: Icon(
-            AppIcons.search,
+            widget.leadingIcon ?? AppIcons.search,
             color: _selectColor(
               disabled: theme.style.leadingDisableColor,
-              error: theme.style.errorColor,
+              err: theme.style.errorColor,
               defaultColor: theme.style.leadingColor,
             ),
             size: AppDimensions.inputIconSize,
@@ -150,7 +154,7 @@ class _AppInputState extends State<AppInput> {
               style: TextStyle(
                 color: _selectColor(
                   disabled: theme.style.labelDisabledColor,
-                  error: theme.style.tailErrorColor,
+                  err: theme.style.tailErrorColor,
                   defaultColor: theme.style.labelColor,
                 ),
                 fontSize:
@@ -169,6 +173,7 @@ class _AppInputState extends State<AppInput> {
             Expanded(
               child: TextField(
                 enabled: _state != _AppInputLocalState.disabled,
+                obscureText: obscureText,
                 style: TextStyle(
                   color: theme.style.placeholderColor,
                   fontSize: AppDimensions.textBody,
@@ -193,11 +198,12 @@ class _AppInputState extends State<AppInput> {
                   isCollapsed: false,
                 ),
                 controller: _controller,
-                focusNode: _focusNode,
+                focusNode: widget.focusNode,
                 cursorColor: theme.style.focusBorderColor,
                 cursorErrorColor: theme.style.errorColor,
                 onSubmitted: _handleSubmit,
                 textInputAction: TextInputAction.done,
+                keyboardType: widget.keyboardType,
               ),
             ),
             IconButton(
@@ -206,14 +212,24 @@ class _AppInputState extends State<AppInput> {
                   _state == _AppInputLocalState.disabled
                       ? null
                       : () {
-                        _controller.clear();
-                        _focusNode.requestFocus();
+                        if (widget.private) {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        } else {
+                          _controller.clear();
+                        }
+                        widget.focusNode.requestFocus();
                       },
               icon: Icon(
-                AppIcons.close,
+                widget.private
+                    ? obscureText
+                        ? AppIcons.eyeClosed
+                        : AppIcons.eye
+                    : AppIcons.close,
                 color: _selectColor(
                   disabled: theme.style.tailDisableColor,
-                  error: theme.style.tailErrorColor,
+                  err: theme.style.tailErrorColor,
                   focus: theme.style.tailFocusColor,
                   blur: theme.style.tailBlurColor,
                   defaultColor: theme.style.tailBlurColor,
